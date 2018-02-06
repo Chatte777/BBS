@@ -128,7 +128,7 @@ public class ReplyDAO {
 		return list; //Database error
 	}
 	
-	
+	 
 	/*
 	public boolean nextPage(int pageNumber){
 		String SQL = "SELECT * from BBS WHERE bbsID < ? AND bbsAvailable = 1";
