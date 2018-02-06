@@ -39,7 +39,7 @@ public class ReplyDAO {
 	}
 	
 	public int getNext(int bbsID){
-		String SQL = "SELECT replyID FROM reply ORDER BY replyID DESC WHERE bbsID = ?";
+		String SQL = "SELECT count(replyID) FROM reply WHERE bbsID = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
@@ -57,7 +57,7 @@ public class ReplyDAO {
 
 	
 	public int write(int bbsID, String userID, String replyContent){
-		String SQL = "INSERT INTO bbs VALUES(?,?,?,?,?,?)";
+		String SQL = "INSERT INTO reply VALUES(?,?,?,?,?,?)";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);

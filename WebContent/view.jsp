@@ -139,9 +139,22 @@
 									}				
 								%>
 							</tr>
+							<tr>
+								<form method="post" action="replyAction.jsp">
+									<table class="table table-striped">
+										<tbody>
+												<tr>
+													<td><input type="text" class="form-control" palceholder="댓글" name="replyContent" maxlength="2048"></td>
+													<td><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
+													<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
+												</tr>
+										</tbody>
+									</table>
+								</form>
+							</tr>
 					</tbody>
 				</table>
-				<a href="bbs.jsp" class\"btn btn-primary">목록</a>
+				<a href="bbs.jsp" class="btn btn-primary">목록</a>
 				<%
 					if(userID!=null && userID.equals(bbs.getUserID())){
 				%>
