@@ -104,7 +104,7 @@ public class ReplyDAO {
 	
 
 	public Reply getReply(int bbsID, int replyID){
-		String SQL = "SELECT * from BBS WHERE bbsID = ? and replyID = ?";
+		String SQL = "SELECT * from REPLY WHERE bbsID = ? and replyID = ?";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -148,7 +148,7 @@ public class ReplyDAO {
 	
 	
 	public int delete(int bbsID, int replyID){
-		String SQL = "UPDATE BBS SET bbsAvailable=0 WHERE BBSid = ? and replyID = ?";
+		String SQL = "UPDATE REPLY SET replyAvailable=0 WHERE bbsID = ? and replyID = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
