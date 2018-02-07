@@ -131,7 +131,7 @@
 								%>
 									<tr>
 										<td><%= list.get(i).getReplyID() %></td>
-										<td><%= list.get(i).getReplyContent() %></td>
+										<td align="left"><%= list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
 										<td><%= list.get(i).getUserID() %></td>
 										<td><%= list.get(i).getReplyDate().substring(0,11)+list.get(i).getReplyDate().substring(11,13)+"시"+list.get(i).getReplyDate().substring(14,16)+"분" %></td>
 									</tr>
@@ -144,7 +144,7 @@
 									<table class="table table-striped">
 										<tbody>
 												<tr>
-													<td><input type="text" class="form-control" palceholder="댓글" name="replyContent" maxlength="2048"></td>
+													<td><input type="text" class="form-control" palceholder="댓글" name="replyContent" maxlength="2048" style="height: 200px;"></td>
 													<td><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
 													<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
 												</tr>

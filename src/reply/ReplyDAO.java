@@ -13,7 +13,7 @@ public class ReplyDAO {
 	
 	public ReplyDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.241.248:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -75,33 +75,7 @@ public class ReplyDAO {
 		return -1; //Database error
 	}
 	
-	/*
-	public ArrayList<Reply> getList(int pageNumber){
-		String SQL = "SELECT * from BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
-		ArrayList<Reply> list = new ArrayList<Reply>();
-		
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*10);
-			
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()){
-				Reply bbs = new Reply();
-				bbs.setBbsID(rs.getInt(1));
-				bbs.setBbsTitle(rs.getString(2));
-				bbs.setUserID(rs.getString(3));
-				bbs.setBbsDate(rs.getString(4));
-				bbs.setBbsContent(rs.getString(5));
-				bbs.setBbsAvailable(rs.getInt(6));
-				list.add(bbs);
-			}
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return list; //Database error
-	}
-	*/
+
 	public ArrayList<Reply> getList(int bbsID){
 		String SQL = "SELECT * from reply WHERE bbsID= ? and replyAvailable = 1";
 		ArrayList<Reply> list = new ArrayList<Reply>();
@@ -128,54 +102,7 @@ public class ReplyDAO {
 		return list; //Database error
 	}
 	
-	 
-	/*
-	public boolean nextPage(int pageNumber){
-		String SQL = "SELECT * from BBS WHERE bbsID < ? AND bbsAvailable = 1";
-		
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext()-(pageNumber-1)*10);
-			
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()){
-				return true;
-			}
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return false; 
-	}
-	*/
-	
-	/*
-	public Reply getReply(int bbsID, int replyID){
-		String SQL = "SELECT * from BBS WHERE bbsID = ?";
-		
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, bbsID);
-			
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()){
-				Reply bbs = new Reply();
-				bbs.setBbsID(rs.getInt(1));
-				bbs.setBbsTitle(rs.getString(2));
-				bbs.setUserID(rs.getString(3));
-				bbs.setBbsDate(rs.getString(4));
-				bbs.setBbsContent(rs.getString(5));
-				bbs.setBbsAvailable(rs.getInt(6));
-				
-				return bbs;
-			}
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return null; 
-	}
-	*/
+
 	public Reply getReply(int bbsID, int replyID){
 		String SQL = "SELECT * from BBS WHERE bbsID = ? and replyID = ?";
 		
@@ -203,23 +130,7 @@ public class ReplyDAO {
 		return null; 
 	}
 	
-	/*
-	public int update(int bbsID, String bbsTitle, String bbsContent){
-		String SQL = "UPDATE BBS SET bbsTitle=?, bbsContent=? WHERE bbsID=?";
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, bbsTitle);
-			pstmt.setString(2, bbsContent);
-			pstmt.setInt(3, bbsID);
-			
-			return pstmt.executeUpdate();
-			
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return -1; //Database error
-	}
-	*/
+
 	public int update(int bbsID, int replyID, String replyContent){
 		String SQL = "UPDATE reply SET replyContent=? WHERE bbsID=? and replyID=?";
 		try{
@@ -235,20 +146,7 @@ public class ReplyDAO {
 		return -1; //Database error
 	}
 	
-	/*
-	public int delete(int bbsID){
-		String SQL = "UPDATE BBS SET bbsAvailable=0 WHERE BBSid = ?";
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, bbsID);
-			
-			return pstmt.executeUpdate();
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return -1; //Database error
-	}
-	*/
+	
 	public int delete(int bbsID, int replyID){
 		String SQL = "UPDATE BBS SET bbsAvailable=0 WHERE BBSid = ? and replyID = ?";
 		try{

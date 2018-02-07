@@ -38,6 +38,13 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="main.jsp">메인</a></li>
 				<li><a href="bbs.jsp">게시판</a></li>
+				<%
+					if("slop1434".equals(session.getAttribute("userID"))){
+				%>
+				<li><a href="bbs_.jsp">대화의숲</a></li>
+				<%
+					}
+				%>
 			</ul>
 			
 			<%
