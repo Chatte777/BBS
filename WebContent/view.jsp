@@ -95,8 +95,7 @@
 	
 	<div class="container">
 		<div class="row">
-
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd; word-break:break-all;">
 					<thead>
 						<tr>
 							<th colspan="4" style="background-color: #eeeeee; text-align: center;">게시판 글</th>
@@ -125,36 +124,36 @@
 				
 				<table class="table table-striped">
 					<tbody>
-								<%
-										ReplyDAO replyDAO = new ReplyDAO();
-										ArrayList<Reply> list = replyDAO.getList(bbsID);
-					
-										for(int i=0; i<list.size(); i++){
-								%>
-									<tr>
-										<td style="width:5%;" align="center"><%= list.get(i).getReplyID() %></td>
-										<td style="width:65%;" align="left"><%= list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
-										<%
-											if(userID!=null && userID.equals(list.get(i).getUserID())){
-										%>
-										<td style="width:5%;" align="center">
+							<%
+									ReplyDAO replyDAO = new ReplyDAO();
+									ArrayList<Reply> list = replyDAO.getList(bbsID);
+				
+									for(int i=0; i<list.size(); i++){
+							%>
+								<tr>
+									<td  align="center"><%= list.get(i).getReplyID() %></td>
+									<td  align="left" style="word-break:break-all;"><%= list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+									<%
+										if(userID!=null && userID.equals(list.get(i).getUserID())){
+									%>
+										<td  align="center">
 											<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID() %>" 
 												type="button" class="close" aria-label="close">
 												<span aria-hidden="true">&times;</span>
-											</button>
 											</a>
 										</td>
-										<%
-												}
-										%>
-										<td style="width:10%;"><%= list.get(i).getUserID() %></td>
-										<td style="width:15%;"><%= list.get(i).getReplyDate().substring(0,11)+list.get(i).getReplyDate().substring(11,13)+"시"+list.get(i).getReplyDate().substring(14,16)+"분" %></td>
-									</tr>
-								<%
-									}
-								%>
+									<%
+											}
+									%>
+									<td style="width:10%;"><%= list.get(i).getUserID() %></td>
+									<td style="width:15%;"><%= list.get(i).getReplyDate().substring(0,11)+list.get(i).getReplyDate().substring(11,13)+"시"+list.get(i).getReplyDate().substring(14,16)+"분" %></td>
+								</tr>
+							<%
+								}
+							%>
 					</tbody>
 				</table>
+			</div>
 				
 				<table class="table table-condensed">
 						<form method="post" action="replyAction.jsp">
@@ -180,7 +179,7 @@
 				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
 
 		</div>
-	</div>
+
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
