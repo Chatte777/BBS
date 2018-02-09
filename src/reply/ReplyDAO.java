@@ -13,7 +13,7 @@ public class ReplyDAO {
 	
 	public ReplyDAO() {
 		try {
-			String dbURL = "jdbc:mysql://127.0.0.1:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");

@@ -7,7 +7,7 @@ public class ThreadMaster {
 	private String threadContent;
 	private String threadMakeUser;
 	private String threadMakeDt;
-	private int thraedReadCnt;
+	private int threadReadCnt;
 	private int threadLikeCnt;
 	private int threadDislikeCnt;
 	private int threadDeleteYn;
@@ -48,11 +48,11 @@ public class ThreadMaster {
 	public void setThreadMakeDt(String threadMakeDt) {
 		this.threadMakeDt = threadMakeDt;
 	}
-	public int getThraedReadCnt() {
-		return thraedReadCnt;
+	public int getThreadReadCnt() {
+		return threadReadCnt;
 	}
-	public void setThraedReadCnt(int thraedReadCnt) {
-		this.thraedReadCnt = thraedReadCnt;
+	public void setThreadReadCnt(int thraedReadCnt) {
+		this.threadReadCnt = thraedReadCnt;
 	}
 	public int getThreadLikeCnt() {
 		return threadLikeCnt;

@@ -13,7 +13,7 @@ public class ThreadMasterDAO {
 	
 	public ThreadMasterDAO() {
 		try {
-			String dbURL = "jdbc:mysql://127.0.0.1:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -87,10 +87,14 @@ public class ThreadMasterDAO {
 				ThreadMaster threadMaster = new ThreadMaster();
 				threadMaster.setThreadNo(rs.getInt(1));
 				threadMaster.setThreadTitle(rs.getString(2));
-				threadMaster.setThreadMakeUser(rs.getString(3));
-				threadMaster.setThreadMakeDt(rs.getString(4));
-				threadMaster.setThreadContent(rs.getString(5));
-				threadMaster.setThreadDeleteYn(rs.getInt(6));
+				threadMaster.setThreadTm(rs.getInt(3));
+				threadMaster.setThreadContent(rs.getString(4));
+				threadMaster.setThreadMakeUser(rs.getString(5));
+				threadMaster.setThreadMakeDt(rs.getString(6));
+				threadMaster.setThreadReadCnt(rs.getInt(7));
+				threadMaster.setThreadLikeCnt(rs.getInt(8));
+				threadMaster.setThreadDislikeCnt(rs.getInt(9));
+				threadMaster.setThreadDeleteYn(rs.getInt(10));
 				list.add(threadMaster);
 			}
 		} catch(Exception e){
@@ -130,10 +134,14 @@ public class ThreadMasterDAO {
 				ThreadMaster threadMaster = new ThreadMaster();
 				threadMaster.setThreadNo(rs.getInt(1));
 				threadMaster.setThreadTitle(rs.getString(2));
-				threadMaster.setThreadMakeUser(rs.getString(3));
-				threadMaster.setThreadMakeDt(rs.getString(4));
-				threadMaster.setThreadContent(rs.getString(5));
-				threadMaster.setThreadDeleteYn(rs.getInt(6));
+				threadMaster.setThreadTm(rs.getInt(3));
+				threadMaster.setThreadContent(rs.getString(4));
+				threadMaster.setThreadMakeUser(rs.getString(5));
+				threadMaster.setThreadMakeDt(rs.getString(6));
+				threadMaster.setThreadReadCnt(rs.getInt(7));
+				threadMaster.setThreadLikeCnt(rs.getInt(8));
+				threadMaster.setThreadDislikeCnt(rs.getInt(9));
+				threadMaster.setThreadDeleteYn(rs.getInt(10));
 				
 				return threadMaster;
 			}

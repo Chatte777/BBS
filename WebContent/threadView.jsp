@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="bbs.Bbs" %>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="threadMaster.ThreadMaster" %>
+<%@ page import="threadMaster.ThreadMasterDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="reply.Reply" %>
-<%@ page import="reply.ReplyDAO" %>
+<%@ page import="threadReply.ThreadReply" %>
+<%@ page import="threadReply.ThreadReplyDAO" %>
 
 
 <!DOCTYPE html>
@@ -24,19 +24,19 @@
 			userID = (String)session.getAttribute("userID");
 		}
 		
-		int bbsID = 0;
-		if(request.getParameter("bbsID") != null){
-			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		int threadNo = 0;
+		if(request.getParameter("threadNo") != null){
+			threadNo = Integer.parseInt(request.getParameter("threadNo"));
 		}
 		
-		if(bbsID == 0){
+		if(threadNo == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글입니다.')");
 			script.println("location.href = 'bbs.jsp'");
 			script.println("</script>"); 
 		}
-		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		ThreadMaster threadMaster = new ThreadMasterDAO().getThreadMaster(threadNo);
 	%>
 	
 	
@@ -54,19 +54,19 @@
 					<tbody>
 							<tr>
 								<td style="width: 20%;">글제목</td>
-								<td colspan="3"><%= bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+								<td colspan="3"><%= threadMaster.getThreadTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
 							</tr>
 							<tr>
 								<td>작성자</td>
-								<td colspan="3"><%= bbs.getUserID() %></td>
+								<td colspan="3"><%= threadMaster.getThreadMakeUser() %></td>
 							</tr>
 							<tr>
 								<td>작성일자</td>
-								<td colspan="3"><%= bbs.getBbsDate().substring(0,11)+bbs.getBbsDate().substring(11,13)+"시"+bbs.getBbsDate().substring(14,16)+"분" %></td>
+								<td colspan="3"><%= threadMaster.getThreadMakeDt().substring(0,11) + threadMaster.getThreadMakeDt().substring(11,13) + "시" + threadMaster.getThreadMakeDt().substring(14,16)+"분" %></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td colspan="3" style="min-height: 200px; text-align: left;"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>")%></td>
+								<td colspan="3" style="min-height: 200px; text-align: left;"><%=threadMaster.getThreadContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>")%></td>
 							</tr>
 						</tbody>
 				</table>
@@ -74,19 +74,19 @@
 				<table class="table table-striped">
 					<tbody>
 							<%
-									ReplyDAO replyDAO = new ReplyDAO();
-									ArrayList<Reply> list = replyDAO.getList(bbsID);
+									ThreadReplyDAO threadReplyDAO = new ThreadReplyDAO();
+									ArrayList<ThreadReply> list = threadReplyDAO.getList(threadNo);
 				
 									for(int i=0; i<list.size(); i++){
 							%>
 								<tr>
-									<td  align="center"><%= list.get(i).getReplyID() %></td>
+									<td  align="center"><%= list.get(i).getThreadNo() %></td>
 									<td  align="left" style="word-break:break-all;"><%= list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
 									<%
-										if(userID!=null && userID.equals(list.get(i).getUserID())){
+										if(userID!=null && userID.equals(list.get(i).getReplyMakeUser())){
 									%>
 										<td  align="center">
-											<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID() %>" 
+											<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="threadReplyDeleteAction.jsp?bbsID=<%=threadNo%>&replyID=<%=list.get(i).getReplyNo() %>" 
 												type="button" class="close" aria-label="close">
 												<span aria-hidden="true">&times;</span>
 											</a>
@@ -94,8 +94,8 @@
 									<%
 											}
 									%>
-									<td style="width:10%;"><%= list.get(i).getUserID() %></td>
-									<td style="width:15%;"><%= list.get(i).getReplyDate().substring(0,11)+list.get(i).getReplyDate().substring(11,13)+"시"+list.get(i).getReplyDate().substring(14,16)+"분" %></td>
+									<td style="width:10%;"><%= list.get(i).getReplyMakeUser() %></td>
+									<td style="width:15%;"><%= list.get(i).getReplyMakeDt().substring(0,11)+list.get(i).getReplyMakeDt().substring(11,13)+"시"+list.get(i).getReplyMakeDt().substring(14,16)+"분" %></td>
 								</tr>
 							<%
 								}
@@ -111,17 +111,17 @@
 										<td style="width:10%; vertical-align:bottom;" align="center">
 											<input type="submit" class="btn btn-primary pull-right" value="댓글작성">
 										</td>
-										<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
+										<input type="hidden" name="threadNo" value="<%=threadMaster.getThreadNo()%>">
 								</tbody>
 						</form>
 				</table>
 				
 				<a href="bbs.jsp" class="btn btn-primary">목록</a>
 				<%
-					if(userID!=null && userID.equals(bbs.getUserID())){
+					if(userID!=null && userID.equals(threadMaster.getThreadMakeUser())){
 				%>
-						<a href="update.jsp?bbsID=<%=bbsID%>" class="btn btn-priamry">수정</a>
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%=bbsID%>" class="btn btn-priamry">삭제</a>
+						<a href="update.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">수정</a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">삭제</a>
 				<%
 					}
 				%>
@@ -132,10 +132,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	
-	
-	
-	
-	
-	
-	
+</body>
+</html>
+</body>
+</html>

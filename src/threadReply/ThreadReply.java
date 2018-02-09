@@ -16,7 +16,7 @@ public class ThreadReply {
 	public void setThreadNo(int threadNo) {
 		this.threadNo = threadNo;
 	}
-	public int getreplyNo() {
+	public int getReplyNo() {
 		return replyNo;
 	}
 	public void setReplyNo(int replyNo) {

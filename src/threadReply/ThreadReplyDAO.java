@@ -13,7 +13,7 @@ public class ThreadReplyDAO {
 	
 	public ThreadReplyDAO() {
 		try {
-			String dbURL = "jdbc:mysql://127.0.0.1:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -90,10 +90,12 @@ public class ThreadReplyDAO {
 				ThreadReply threadReply = new ThreadReply();
 				threadReply.setThreadNo(rs.getInt(1));
 				threadReply.setReplyNo(rs.getInt(2));
-				threadReply.setReplyMakeUser(rs.getString(3));
-				threadReply.setReplyMakeDt(rs.getString(4));
-				threadReply.setReplyContent(rs.getString(5));
-				threadReply.setReplyDeleteYn(rs.getInt(6));
+				threadReply.setReplyContent(rs.getString(3));
+				threadReply.setReplyMakeUser(rs.getString(4));
+				threadReply.setReplyMakeDt(rs.getString(5));
+				threadReply.setReplyLikeCnt(rs.getInt(6));
+				threadReply.setReplyDislikeCnt(rs.getInt(7));
+				threadReply.setReplyDeleteYn(rs.getInt(8));
 				list.add(threadReply);
 			}
 		} catch(Exception e){
@@ -117,10 +119,12 @@ public class ThreadReplyDAO {
 				ThreadReply threadReply = new ThreadReply();
 				threadReply.setThreadNo(rs.getInt(1));
 				threadReply.setReplyNo(rs.getInt(2));
-				threadReply.setReplyMakeUser(rs.getString(3));
-				threadReply.setReplyMakeDt(rs.getString(4));
-				threadReply.setReplyContent(rs.getString(5));
-				threadReply.setReplyDeleteYn(rs.getInt(6));
+				threadReply.setReplyContent(rs.getString(3));
+				threadReply.setReplyMakeUser(rs.getString(4));
+				threadReply.setReplyMakeDt(rs.getString(5));
+				threadReply.setReplyLikeCnt(rs.getInt(6));
+				threadReply.setReplyDislikeCnt(rs.getInt(7));
+				threadReply.setReplyDeleteYn(rs.getInt(8));
 				
 				return threadReply;
 			}
