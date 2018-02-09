@@ -121,7 +121,7 @@
 					if(userID!=null && userID.equals(threadMaster.getThreadMakeUser())){
 				%>
 						<a href="threadUpdate.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">수정</a>
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">삭제</a>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="threadDeleteAction.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">삭제</a>
 				<%
 					}
 				%>
