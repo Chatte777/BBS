@@ -29,15 +29,20 @@
 		%>
 		<a class="navbar-brand" href="main.jsp">DREAMY CAT</a>
 		<%
-			}
+			} else {
 		%>
 		<a class="navbar-brand" href="main.jsp">건전한 주식투자</a>
+		<%
+			}
+		%>
+		
 	</div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="main.jsp">메인</a></li>
 			<li><a href="bbs.jsp">게시판</a></li>
+			<li><a href="uploadBbs.jsp">파일 업로드 게시판</a></>
 			<%
 				if (userID != null && userID.equals("slop1434")) {
 			%>
