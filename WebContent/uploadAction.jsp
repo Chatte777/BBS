@@ -5,7 +5,8 @@
 <%@ page import="java.io.File"%>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
-<%@ page import = "java.io.PrintWriter" %>
+<%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.util.Enumeration"%>
 
 
 <!DOCTYPE html>
@@ -23,33 +24,37 @@
 	
 	MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding, new DefaultFileRenamePolicy());
 	
-	String fileName = multipartRequest.getOriginalFileName("file");
-	String fileRealName = multipartRequest.getFilesystemName("file");
-	String fileNameLowerCase = fileName.toLowerCase();
-	
-	if(!fileNameLowerCase.endsWith(".doc") && !fileNameLowerCase.endsWith(".hwp") && !fileNameLowerCase.endsWith(".jpg") && !fileNameLowerCase.endsWith(".gif") && !fileNameLowerCase.endsWith(".png") && !fileNameLowerCase.endsWith(".pdf") && !fileNameLowerCase.endsWith(".xls") && !fileNameLowerCase.endsWith(".jpeg")){
-		File file = new File(directory + fileRealName);
-		System.gc();
-		file.delete();
+	Enumeration fileNames = multipartRequest.getFileNames();
+	while(fileNames.hasMoreElements()){
+		String parameter = (String)fileNames.nextElement();
 		
-		//out.write("업로드할 수 없는 확장자입니다.");
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('업로드할 수 없는 확장자입니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else {
-		new FileDAO().upload(fileName, fileRealName);
-		//out.write("파일명: " + fileName + "<br>");
-		//out.write("실제파일명: " + fileRealName + "<br>");
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('업로드 되었습니다..')");
-		script.println("history.back()");
-		script.println("</script>");	
+		String fileName = multipartRequest.getOriginalFileName(parameter);
+		String fileRealName = multipartRequest.getFilesystemName(parameter);
+		if(fileName == null) continue;
+		
+		String fileNameLowerCase = fileName.toLowerCase();
+		if(!fileNameLowerCase.endsWith(".doc") && !fileNameLowerCase.endsWith(".hwp") && !fileNameLowerCase.endsWith(".jpg") && !fileNameLowerCase.endsWith(".gif") && !fileNameLowerCase.endsWith(".png") && !fileNameLowerCase.endsWith(".pdf") && !fileNameLowerCase.endsWith(".xls") && !fileNameLowerCase.endsWith(".jpeg")){
+			File file = new File(directory + fileRealName);
+			System.gc();
+			file.delete();
+			
+			//out.write("업로드할 수 없는 확장자입니다.");
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('업로드할 수 없는 확장자입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else {
+			new FileDAO().upload(fileName, fileRealName);
+			//out.write("파일명: " + fileName + "<br>");
+			//out.write("실제파일명: " + fileRealName + "<br>");
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('업로드 되었습니다..')");
+			script.println("history.back()");
+			script.println("</script>");	
+		}
 	}
-	
-	
 	%>
 </body>
 </html>

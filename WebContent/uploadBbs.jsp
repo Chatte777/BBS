@@ -19,15 +19,10 @@ a, a:hover {
 <body>
 	<form action="uploadAction.jsp" method="post"
 		enctype="multipart/form-data">
-		<div class="row">
-			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">파일:</div>
-			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-				<input type="file" name="file">
-			</div>
-			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-				<input type="submit" value="업로드" style="float: left;">
-			</div>
-		</div>
+		파일 : <input type="file" name="file1"><br>
+		파일 : <input type="file" name="file2"><br>
+		파일 : <input type="file" name="file3"><br>
+		<input type="submit" value="업로드"><br>
 	</form>
 
 	<br>
