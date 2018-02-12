@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ page import="file.FileDAO" %>
-<%@ page import="java.io.File" %>
-<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
-<%@ page import="com.oreilly.servlet.MultipartRequest" %>
+	pageEncoding="UTF-8"%>
 
-    
+<%@ page import="file.FileDAO"%>
+<%@ page import="java.io.File"%>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page import = "java.io.PrintWriter" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +31,25 @@
 		File file = new File(directory + fileRealName);
 		System.gc();
 		file.delete();
-		out.write("업로드할 수 없는 확장자입니다.");
+		
+		//out.write("업로드할 수 없는 확장자입니다.");
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('업로드할 수 없는 확장자입니다.')");
+		script.println("history.back()");
+		script.println("</script>");
 	} else {
 		new FileDAO().upload(fileName, fileRealName);
-		out.write("파일명: " + fileName + "<br>");
-		out.write("실제파일명: " + fileRealName + "<br>");
+		//out.write("파일명: " + fileName + "<br>");
+		//out.write("실제파일명: " + fileRealName + "<br>");
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('업로드 되었습니다..')");
+		script.println("history.back()");
+		script.println("</script>");	
 	}
 	
 	
-	%>	
+	%>
 </body>
 </html>
