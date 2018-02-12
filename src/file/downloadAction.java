@@ -31,7 +31,8 @@ public class downloadAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String fileName = request.getParameter("file");
-		String directory = this.getServletContext().getRealPath("/upload/");
+		//String directory = this.getServletContext().getRealPath("/upload/");
+		String directory = "E:/Server/uploadFile/uploadFile";
 		File file = new File(directory + "/" + fileName);
 		
 		String mimeType = getServletContext().getMimeType(file.toString());
@@ -57,6 +58,8 @@ public class downloadAction extends HttpServlet {
 		while((data = (fileInputStream.read(b, 0, b.length))) != -1) {
 			servletOutputStream.write(b, 0, data);
 		}
+		
+		new FileDAO().hit(fileName);
 		
 		servletOutputStream.flush();
 		servletOutputStream.close();
