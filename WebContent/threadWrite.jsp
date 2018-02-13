@@ -15,7 +15,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form method="post" action="threadWriteAction.jsp">
+			<form method="post" action="threadWriteAction.jsp" enctype="multipart/form-data">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
@@ -26,43 +26,34 @@
 					<tbody>
 						<tr>
 						<tr>
-							<td>
-								<input type="text" class="form-control" palceholder="글 제목" name="threadTitle" maxlength="50">
-							</td>
+							<td><input type="text" class="form-control" placeholder="글 제목" name="threadTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea type="text" class="form-control" placeholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"></textarea></td>
 						</tr>
 						<tr>
 							<td>
-								<textarea type="text" class="form-control" palceholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"></textarea>
-							</td>
-						</tr>
-					</tbody>
-				</table width="800">
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
-			</form>
-
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-				<tbody>
-					<tr>
-						<td>
-							<div class="row">
-								<form action="threadFileUploadAction.jsp" method="post" enctype="multipart/form-data">
-
-									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">파일:</div>
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+								<div class="row">
+									<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">파일:</div>
+									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 										<input type="file" name="file">
 									</div>
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<input type="submit" value="업로드" style="float: left;">
+									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+										<input type="file" name="file2">
 									</div>
-								</form>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>썸네일</td>
-					</tr>
-				</tbody>
-			</table>
+									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+										<input type="file" name="file3">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>썸네일</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+			</form>
 		</div>
 	</div>
 

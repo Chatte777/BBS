@@ -1,6 +1,6 @@
 package threadFile;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +41,7 @@ public class ThreadFileDAO {
 	}
 
 	public int upload(String fileClientName, String fileServerName, int threadNo) {
-		String SQL = "INSERT INTO file VALUES(?,?,?,?,?,?)";
+		String SQL = "INSERT INTO thread_file VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, threadNo);

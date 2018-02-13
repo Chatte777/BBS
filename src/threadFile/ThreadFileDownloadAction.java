@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import file.FileDAO;
+
 /**
- * Servlet implementation class downloadAction
+ * Servlet implementation class ThreadFileDownloadAction
  */
-@WebServlet("/downloadAction")
-public class downloadAction extends HttpServlet {
+@WebServlet("/ThreadFileDownloadAction")
+public class ThreadFileDownloadAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public downloadAction() {
+    public ThreadFileDownloadAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +61,7 @@ public class downloadAction extends HttpServlet {
 			servletOutputStream.write(b, 0, data);
 		}
 		
-		new ThreadFileDAO().hit(fileName);
+		new FileDAO().hit(fileName);
 		
 		servletOutputStream.flush();
 		servletOutputStream.close();

@@ -125,7 +125,7 @@
 				<%
 					}
 				%>
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+				<a href="threadWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
 
 		</div>
 

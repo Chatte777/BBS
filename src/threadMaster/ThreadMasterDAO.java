@@ -55,18 +55,25 @@ public class ThreadMasterDAO {
 	}
 	
 	public int write(String threadTitle, String threadMakeUser, String threadContent){
-		String SQL = "INSERT INTO thread_master VALUES(?,?,?,?,?,?)";
+		String SQL = "INSERT INTO thread_master VALUES(?,?,?,?,?,?,?,?,?,?)";
+		int tmpNextNo = getNext();
+		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext());
+			pstmt.setInt(1, tmpNextNo);
 			pstmt.setString(2, threadTitle);
-			pstmt.setString(3, threadMakeUser);
-			pstmt.setString(4, getDate());
-			pstmt.setString(5, threadContent);
-			pstmt.setInt(6, 1);
+			pstmt.setInt(3, 1);
+			pstmt.setString(4, threadContent);
+			pstmt.setString(5, threadMakeUser);
+			pstmt.setString(6, getDate());
+			pstmt.setInt(7, 1);
+			pstmt.setInt(8, 1);
+			pstmt.setInt(9, 1);
+			pstmt.setInt(10, 1);
+
+			pstmt.executeUpdate();
 			
-			return pstmt.executeUpdate();
-			
+			return tmpNextNo;
 		} catch(Exception e){
 			e.printStackTrace();
 		}
