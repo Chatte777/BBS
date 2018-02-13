@@ -1,6 +1,6 @@
 package threadFile;
 
-import java.sql.Connection;	
+import java.sql.Connection;		
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,17 +70,17 @@ public class ThreadFileDAO {
 		return -1;
 	}
 
-	/*
-	public ArrayList<ThreadFile> getList() {
-		String SQL = "SELECT * FROM FILE";
+	public ArrayList<ThreadFile> getList(int threadNo) {
+		String SQL = "SELECT * FROM thread_file WHERE thread_no = ?";
 		ArrayList<ThreadFile> list = new ArrayList<ThreadFile>();
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, threadNo);
 			ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				ThreadFile threadFile = new ThreadFile(rs.getString(1), rs.getString(2), rs.getInt(3));
+				ThreadFile threadFile = new ThreadFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
 				list.add(threadFile);
 			}
 		} catch (Exception e) {
@@ -88,6 +88,5 @@ public class ThreadFileDAO {
 		}
 		return list;
 	}
-	*/
 
 }
