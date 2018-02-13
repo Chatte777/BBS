@@ -67,9 +67,7 @@
 						<td>썸네일</td>
 					</tr>
 				</tbody>
-
 			</table>
-
 		</div>
 	</div>
 
