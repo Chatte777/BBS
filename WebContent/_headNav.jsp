@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,7 +32,7 @@
 		<%
 			} else {
 		%>
-		<a class="navbar-brand" href="main.jsp">°ÇÀüÇÑ ÁÖ½ÄÅõÀÚ</a>
+		<a class="navbar-brand" href="main.jsp">ê±´ì „í•œ ì£¼ì‹íˆ¬ìž</a>
 		<%
 			}
 		%>
@@ -40,12 +41,12 @@
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="main.jsp">¸ÞÀÎ</a></li>
-			<li><a href="bbs.jsp">°Ô½ÃÆÇ</a></li>
+			<li class="active"><a href="main.jsp">ë©”ì¸</a></li>
+			<li><a href="bbs.jsp">ê²Œì‹œíŒ</a></li>
 			<%
 				if (userID != null && userID.equals("slop1434")) {
 			%>
-			<li><a href="thread.jsp">´ëÈ­ÀÇ ½£</a></li>
+			<li><a href="thread.jsp">ëŒ€í™”ì˜ ìˆ²</a></li>
 			<%
 				}
 			%>
@@ -57,10 +58,10 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-haspopup="true"
-				aria-expanded="false">Á¢¼ÓÇÏ±â<span class="caret"></span></a>
+				aria-expanded="false">ì ‘ì†í•˜ê¸°<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="login.jsp">·Î±×ÀÎ</a></li>
-					<li><a href="join.jsp">È¸¿ø°¡ÀÔ</a></li>
+					<li><a href="login.jsp">ë¡œê·¸ì¸</a></li>
+					<li><a href="join.jsp">íšŒì›ê°€ìž…</a></li>
 				</ul></li>
 		</ul>
 		<%
@@ -69,9 +70,9 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-haspopup="true"
-				aria-expanded="false">È¸¿ø°ü¸®<span class="caret"></span></a>
+				aria-expanded="false">íšŒì›ê´€ë¦¬<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="logoutAction.jsp">·Î±×¾Æ¿ô</a></li>
+					<li><a href="logoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a></li>
 				</ul></li>
 		</ul>
 		<%
