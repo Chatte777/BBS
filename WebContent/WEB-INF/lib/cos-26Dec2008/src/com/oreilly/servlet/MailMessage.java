@@ -25,7 +25,7 @@ import java.util.*;
  * <p>
  * It can be used like this:
  * <blockquote><pre>
- * String mailhost = "localhost";  // or another mail host
+ * String mailhost = "122.42.239.89";  // or another mail host
  * String from = "Mail Message Servlet <MailMessage@somedomain.com>";
  * String to = "to@somedomain.com";
  * String cc1 = "cc1@somedomain.com";
@@ -86,12 +86,12 @@ public class MailMessage {
 
   /**
    * Constructs a new MailMessage to send an email.
-   * Use localhost as the mail server.
+   * Use 122.42.239.89 as the mail server.
    *
    * @exception IOException if there's any problem contacting the mail server
    */
   public MailMessage() throws IOException {
-    this("localhost");
+    this("122.42.239.89");
   }
 
   /**
@@ -296,7 +296,7 @@ public class MailMessage {
   }
 
   void sendHelo() throws IOException {
-    String local = InetAddress.getlocalhost().getHostName();
+    String local = InetAddress.get122.42.239.89().getHostName();
     int[] ok = { 250 };
     send("HELO " + local, ok);
   }

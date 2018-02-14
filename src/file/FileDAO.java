@@ -11,7 +11,7 @@ public class FileDAO {
 
 	public FileDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/bbs";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/bbs";
 			String dbID = "root";
 			String dbPassword = "root";
 
