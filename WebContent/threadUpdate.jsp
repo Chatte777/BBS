@@ -56,7 +56,7 @@
 	
 	<div class="container">
 		<div class="row">
-			<form method="post" action="threadUpdateAction.jsp?threadNo=<%=threadNo%>">
+			<form method="post" action="threadUpdateAction.jsp?threadNo=<%=threadNo%>" enctype="multipart/form-data">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
@@ -67,10 +67,10 @@
 					<tbody>
 						<tr>
 							<tr>
-								<td><input type="text" class="form-control" palceholder="글 제목" name="threadTitle" maxlength="50" value="<%=threadMaster.getThreadTitle()%>"></td>
+								<td><input type="text" class="form-control" placeholder="글 제목" name="threadTitle" maxlength="50" value="<%=threadMaster.getThreadTitle()%>"></td>
 							</tr>
 							<tr>
-								<td><textarea type="text" class="form-control" palceholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"><%=threadMaster.getThreadContent()%></textarea></td>
+								<td><textarea type="text" class="form-control" placeholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"><%=threadMaster.getThreadContent()%></textarea></td>
 							</tr>
 							<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>

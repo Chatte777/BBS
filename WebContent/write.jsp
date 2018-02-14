@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form method="post" action="writeAction.jsp">
+			<form method="post" action="writeAction.jsp" enctype="multipart/form-data">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
@@ -38,36 +38,12 @@
 									palceholder="글 내용" name="bbsContent" maxlength="2048"
 									style="height: 350px;"></textarea></td>
 						</tr>
+						<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
 			</form>
 
-			<table class="table table-striped"
-				style="text-align: center; border: 1px solid #dddddd">
-				<tbody>
-					<tr>
-						<td>
-							<div class="row">
-								<form action="uploadAction.jsp" method="post"
-									enctype="multipart/form-data">
-
-									<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">파일:</div>
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<input type="file" name="file">
-									</div>
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<input type="submit" value="업로드" style="float: left;">
-									</div>
-								</form>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>썸네일</td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
 

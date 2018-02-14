@@ -70,11 +70,11 @@
 			<%
 				if(pageNumber!= 1){
 			%>
-				<a href="thread.jsp?pageNumber=<%=pageNumber-1%>" class="btn btn-success btn-arrow-left">이전</a>
+				<a href="thread.jsp?pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">이전</a>
 			<%
 				} if(threadMasterDAO.nextPage(pageNumber+1)) {
 			%>
-				<a href="thread.jsp?pageNumber=<%=pageNumber+1%>" class="btn btn-success btn-arrow-right">다음</a>
+				<a href="thread.jsp?pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">다음</a>
 			<%
 				}
 			%>

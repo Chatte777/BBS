@@ -28,12 +28,13 @@
 		String userID = null;
 		String threadTitle = null;
 		String threadContent = null;
-	
+
 		String directory = "E:/Server/uploadFile/threadFile";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 
-		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding, new DefaultFileRenamePolicy());
+		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding,
+				new DefaultFileRenamePolicy());
 
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
@@ -45,7 +46,8 @@
 			script.println("location.href = 'login.jsp'");
 			script.println("</script>");
 		} else {
-			if (multipartRequest.getParameterValues("threadTitle")[0] == null || multipartRequest.getParameterValues("threadContent")[0] == null) {
+			if (multipartRequest.getParameterValues("threadTitle")[0] == null
+					|| multipartRequest.getParameterValues("threadContent")[0] == null) {
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('입력이 안된 사항이 있습니다.')");
@@ -65,6 +67,7 @@
 				} else {
 
 					Enumeration fileNames = multipartRequest.getFileNames();
+					int successFlag = 1;
 
 					while (fileNames.hasMoreElements()) {
 						String parameter = (String) fileNames.nextElement();
@@ -84,21 +87,29 @@
 							file.delete();
 
 							//out.write("업로드할 수 없는 확장자입니다.");
+							successFlag = 2;
 							PrintWriter script = response.getWriter();
 							script.println("<script>");
 							script.println("alert('업로드할 수 없는 확장자입니다.')");
 							script.println("history.back()");
 							script.println("</script>");
+							
+							break;
 						} else {
 							new ThreadFileDAO().upload(fileClientName, fileServerName, result);
 							//out.write("파일명: " + fileName + "<br>");
 							//out.write("실제파일명: " + fileRealName + "<br>");
-							PrintWriter script = response.getWriter();
-							script.println("<script>");
-							script.println("alert('업로드 되었습니다..')");
-							script.println("location.href='thread.jsp'");
-							script.println("</script>");
+
 						}
+
+					}
+					if (successFlag == 1) {
+						PrintWriter script = response.getWriter();
+						script.println("<script>");
+						script.println("alert('업로드 되었습니다..')");
+						script.println("location.href='thread.jsp'");
+						script.println("</script>");
+
 					}
 				}
 			}

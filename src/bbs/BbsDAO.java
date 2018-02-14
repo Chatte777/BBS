@@ -56,16 +56,19 @@ public class BbsDAO {
 	
 	public int write(String bbsTitle, String userID, String bbsContent){
 		String SQL = "INSERT INTO bbs VALUES(?,?,?,?,?,?)";
+		int tmpNextNo = getNext();
+		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext());
+			pstmt.setInt(1, tmpNextNo);
 			pstmt.setString(2, bbsTitle);
 			pstmt.setString(3, userID);
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1);
 			
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			return tmpNextNo;
 			
 		} catch(Exception e){
 			e.printStackTrace();
@@ -151,7 +154,8 @@ public class BbsDAO {
 			pstmt.setString(2, bbsContent);
 			pstmt.setInt(3, bbsID);
 			
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			return bbsID;
 			
 		} catch(Exception e){
 			e.printStackTrace();

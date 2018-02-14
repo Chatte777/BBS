@@ -1,33 +1,58 @@
 package file;
 
 public class FileDTO {
-	private String fileName;
-	private String fileRealName;
-	private int downloadCount;
+	private int bbsId;
+	private int fileNo;
+	private String fileClientName;
+	private String fileServerName;
+	private int fileTp;
+	private int fileDeleteYn;
 	
-	public String getFileName() {
-		return fileName;
+	public int getBbsId() {
+		return bbsId;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setBbsId(int bbsId) {
+		this.bbsId = bbsId;
 	}
-	public String getFileRealName() {
-		return fileRealName;
+	public int getFileNo() {
+		return fileNo;
 	}
-	public void setFileRealName(String fileRealName) {
-		this.fileRealName = fileRealName;
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+	public String getFileClientName() {
+		return fileClientName;
+	}
+	public void setFileClientName(String fileClientName) {
+		this.fileClientName = fileClientName;
+	}
+	public String getFileServerName() {
+		return fileServerName;
+	}
+	public void setFileServerName(String fileServerName) {
+		this.fileServerName = fileServerName;
+	}
+	public int getFileTp() {
+		return fileTp;
+	}
+	public void setFileTp(int fileTp) {
+		this.fileTp = fileTp;
+	}
+	public int getFileDeleteYn() {
+		return fileDeleteYn;
+	}
+	public void setFileDeleteYn(int fileDeleteYn) {
+		this.fileDeleteYn = fileDeleteYn;
 	}
 	
-	public int getDownloadCount() {
-		return downloadCount;
-	}
-	public void setDownloadCount(int downloadCount) {
-		this.downloadCount = downloadCount;
-	}
-	public FileDTO(String fileName, String fileRealName, int downloadCount) {
+	public FileDTO(int bbsId, int fileNo, String fileClientName, String fileServerName, int fileTp,
+			int fileDeleteYn) {
 		super();
-		this.fileName = fileName;
-		this.fileRealName = fileRealName;
-		this.downloadCount = downloadCount;
+		this.bbsId = bbsId;
+		this.fileNo = fileNo;
+		this.fileClientName = fileClientName;
+		this.fileServerName = fileServerName;
+		this.fileTp = fileTp;
+		this.fileDeleteYn = fileDeleteYn;
 	}
 }

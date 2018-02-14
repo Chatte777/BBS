@@ -3,9 +3,13 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="bbs.Bbs"%>
 <%@ page import="bbs.BbsDAO"%>
+<%@ page import="file.FileDAO"%>
+<%@ page import="file.FileDTO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="reply.Reply"%>
 <%@ page import="reply.ReplyDAO"%>
+<%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.io.File"%>
 
 
 <!DOCTYPE html>
@@ -70,6 +74,21 @@
 						<td colspan="3" style="min-height: 200px; text-align: left;"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
 					.replaceAll("\n", "<br>")%></td>
 					</tr>
+					
+					<tr>
+						<td colspan="2">
+							<%
+								ArrayList<FileDTO> fileList = new FileDAO().getList(bbs.getBbsID());
+
+								for (FileDTO file : fileList) {
+									out.write("<a href=\"" + request.getContextPath() + "/downloadAction?file="
+											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + file.getFileClientName()
+											//+ "(다운로드 횟수: " + file.getDownloadCount() 
+											+ "</a><br>");
+								}
+							%>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 
@@ -101,14 +120,6 @@
 					<%
 						}
 					%>
-					<tr>
-						<td>
-							<a href="fileDownload.jsp">파일 다운로드 페이지</a>
-						</td>
-					</tr>
-					<tr>
-						<td>썸네일</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>

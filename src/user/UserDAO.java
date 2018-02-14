@@ -32,7 +32,7 @@ public class UserDAO {
 			
 			if(rs.next()){
 				if(rs.getString(1).equals(userPassword)){
-					return 1; // Login success
+					return 1; // Login successs
 				}
 				else
 					return 0; // Password ºÒÀÏÄ¡

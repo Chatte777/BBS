@@ -118,7 +118,7 @@ public class HttpsMessage extends com.oreilly.servlet.HttpMessage
 			{
 				throw new Exception("Unable to load the Microsoft SSL stream handler.  Check classpath."  + cfe.toString());
 			}			
-			//If the stream handler factory has already been successfuly set
+			//If the stream handler factory has already been successsfuly set
 			//make sure our flag is set and eat the error
 			catch( Error err ){m_bStreamHandlerSet = true;}
 		}

@@ -56,7 +56,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form method="post" action="updateAction.jsp?bbsID=<%=bbsID%>">
+			<form method="post" action="updateAction.jsp?bbsID=<%=bbsID%>" enctype="multipart/form-data">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
@@ -71,33 +71,15 @@
 						<tr>
 						<tr>
 							<td><input type="text" class="form-control"
-								palceholder="글 제목" name="bbsTitle" maxlength="50"
+								placeholder="글 제목" name="bbsTitle" maxlength="50"
 								value="<%=bbs.getBbsTitle()%>"></td>
 						</tr>
 						<tr>
 							<td><textarea type="text" class="form-control"
-									palceholder="글 내용" name="bbsContent" maxlength="2048"
+									placeholder="글 내용" name="bbsContent" maxlength="2048"
 									style="height: 350px;"><%=bbs.getBbsContent()%></textarea></td>
 						</tr>
-						<tr>
-							<td>
-								<form action="uploadAction.jsp" method="post"
-									enctype="multipart/form-data">
-									<div class="row">
-										<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">파일:</div>
-										<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											<input type="file" name="file">
-										</div>
-										<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-											<input type="submit" value="업로드" style="float: left;">
-										</div>
-									</div>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>썸네일</td>
-						</tr>
+						<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글수정">

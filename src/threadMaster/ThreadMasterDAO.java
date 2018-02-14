@@ -166,7 +166,8 @@ public class ThreadMasterDAO {
 			pstmt.setString(2, threadContent);
 			pstmt.setInt(3, threadNo);
 			
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			return threadNo;
 			
 		} catch(Exception e){
 			e.printStackTrace();

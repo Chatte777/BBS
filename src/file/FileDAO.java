@@ -21,13 +21,35 @@ public class FileDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getNext(int threadNo){
+		String SQL = "SELECT COUNT(file_no) FROM file WHERE bbsID=?";
+		
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, threadNo);
+			ResultSet rs = pstmt.executeQuery();
 
-	public int upload(String fileName, String fileRealName) {
-		String SQL = "INSERT INTO file VALUES(?,?,0)";
+			if(rs.next()){
+				return rs.getInt(1)+1;
+			}
+			return 1; //첫 게시물인 경우
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int upload(String fileClientName, String fileServerName, int bbsId) {
+		String SQL = "INSERT INTO file VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, fileName);
-			pstmt.setString(2, fileRealName);
+			pstmt.setInt(1, bbsId);
+			pstmt.setInt(2, getNext(bbsId));
+			pstmt.setString(3, fileClientName);
+			pstmt.setString(4, fileServerName);
+			pstmt.setInt(5, 1);
+			pstmt.setInt(6, 1);
 
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -48,16 +70,17 @@ public class FileDAO {
 		return -1;
 	}
 
-	public ArrayList<FileDTO> getList() {
-		String SQL = "SELECT * FROM FILE";
+	public ArrayList<FileDTO> getList(int bbsId) {
+		String SQL = "SELECT * FROM file WHERE bbsId=?";
 		ArrayList<FileDTO> list = new ArrayList<FileDTO>();
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsId);
 			ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()){
-				FileDTO file = new FileDTO(rs.getString(1), rs.getString(2), rs.getInt(3));
+				FileDTO file = new FileDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
 				list.add(file);
 			}
 		} catch (Exception e) {
