@@ -24,7 +24,6 @@
 			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 				class="icon-bar"></span>
 		</button>
-
 		<%
 			if (userID != null && userID.equals("slop1434")) {
 		%>

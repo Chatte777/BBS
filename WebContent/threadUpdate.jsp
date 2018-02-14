@@ -72,6 +72,7 @@
 							<tr>
 								<td><textarea type="text" class="form-control" palceholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"><%=threadMaster.getThreadContent()%></textarea></td>
 							</tr>
+							<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글수정">
