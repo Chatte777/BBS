@@ -41,7 +41,7 @@
 			}
 		
 			ThreadMaster threadMaster = new ThreadMasterDAO().getThreadMaster(threadNo);
-			if(!userID.equals(threadMaster.getThreadNo())){
+			if(!userID.equals(threadMaster.getThreadMakeUser())){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('권한이 없습니다.')");

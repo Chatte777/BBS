@@ -79,7 +79,7 @@
 								ArrayList<ThreadFile> fileList = new ThreadFileDAO().getList(threadMaster.getThreadNo());
 
 								for (ThreadFile file : fileList) {
-									out.write("<a href=\"" + request.getContextPath() + "/downloadAction?file="
+									out.write("<a href=\"" + request.getContextPath() + "/ThreadFileDownloadAction?file="
 											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + file.getFileClientName()
 											//+ "(다운로드 횟수: " + file.getDownloadCount() 
 											+ "</a><br>");
@@ -135,7 +135,7 @@
 		<%
 			if (userID != null && userID.equals(threadMaster.getThreadMakeUser())) {
 		%>
-		<a href="threadUpdate.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">수정</a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="threadDeleteAction.jsp?bbsID=<%=threadNo%>" class="btn btn-priamry">삭제</a>
+		<a href="threadUpdate.jsp?threadNo=<%=threadNo%>" class="btn btn-priamry">수정</a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="threadDeleteAction.jsp?threadNo=<%=threadNo%>" class="btn btn-priamry">삭제</a>
 		<%
 			}
 		%>
