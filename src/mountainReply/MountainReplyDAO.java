@@ -154,7 +154,7 @@ public class MountainReplyDAO {
 	
 	
 	public int delete(int mountainNo, int replyNo){
-		String SQL = "UPDATE mountain_reply SET reply_delete_yn=0 WHERE mountain_no = ? and reply_no = ?";
+		String SQL = "UPDATE mountain_reply SET reply_delete_yn=2 WHERE mountain_no = ? and reply_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, mountainNo);

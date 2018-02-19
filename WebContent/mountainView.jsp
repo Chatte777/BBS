@@ -105,7 +105,7 @@
 						<%
 							if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
 						%>
-						<td align="center"><a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyID=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
+						<td align="center"><a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
 						</a></td>
 						<%
 							}
