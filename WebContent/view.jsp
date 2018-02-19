@@ -78,7 +78,7 @@
 					<tr>
 						<td colspan="2">
 							<%
-								ArrayList<FileDTO> fileList = new FileDAO().getList(bbs.getBbsID());
+							ArrayList<FileDTO> fileList = new FileDAO().getList(bbs.getBbsID());
 
 								for (FileDTO file : fileList) {
 									out.write("<a href=\"" + request.getContextPath() + "/downloadAction?file="
