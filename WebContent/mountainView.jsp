@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="threadMaster.ThreadMaster"%>
-<%@ page import="threadMaster.ThreadMasterDAO"%>
+<%@ page import="mountainMaster.MountainMaster"%>
+<%@ page import="mountainMaster.MountainMasterDAO"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="threadReply.ThreadReply"%>
-<%@ page import="threadReply.ThreadReplyDAO"%>
+<%@ page import="mountainReply.MountainReply"%>
+<%@ page import="mountainReply.MountainReplyDAO"%>
 <%@ page import="java.io.File"%>
-<%@ page import="threadFile.ThreadFile"%>
-<%@ page import="threadFile.ThreadFileDAO"%>
+<%@ page import="mountainFile.MountainFile"%>
+<%@ page import="mountainFile.MountainFileDAO"%>
 
 
 <!DOCTYPE html>
@@ -26,19 +26,19 @@
 			userID = (String) session.getAttribute("userID");
 		}
 
-		int threadNo = 0;
-		if (request.getParameter("threadNo") != null) {
-			threadNo = Integer.parseInt(request.getParameter("threadNo"));
+		int mountainNo = 0;
+		if (request.getParameter("mountainNo") != null) {
+			mountainNo = Integer.parseInt(request.getParameter("mountainNo"));
 		}
 
-		if (threadNo == 0) {
+		if (mountainNo == 0) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href = 'thread.jsp'");
+			script.println("location.href = 'mountain.jsp'");
 			script.println("</script>");
 		}
-		ThreadMaster threadMaster = new ThreadMasterDAO().getThreadMaster(threadNo);
+		MountainMaster mountainMaster = new MountainMasterDAO().getMountainMaster(mountainNo);
 	%>
 
 
@@ -56,30 +56,30 @@
 				<tbody>
 					<tr>
 						<td style="width: 20%;">글제목</td>
-						<td colspan="3"><%=threadMaster.getThreadTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+						<td colspan="3"><%=mountainMaster.getMountainTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td colspan="3"><%=threadMaster.getThreadMakeUser()%></td>
+						<td colspan="3"><%=mountainMaster.getMountainMakeUser()%></td>
 					</tr>
 					<tr>
 						<td>작성일자</td>
-						<td colspan="3"><%=threadMaster.getThreadMakeDt().substring(0, 11) + threadMaster.getThreadMakeDt().substring(11, 13)
-					+ "시" + threadMaster.getThreadMakeDt().substring(14, 16) + "분"%></td>
+						<td colspan="3"><%=mountainMaster.getMountainMakeDt().substring(0, 11) + mountainMaster.getMountainMakeDt().substring(11, 13)
+					+ "시" + mountainMaster.getMountainMakeDt().substring(14, 16) + "분"%></td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="3" style="min-height: 200px; text-align: left;"><%=threadMaster.getThreadContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+						<td colspan="3" style="min-height: 200px; text-align: left;"><%=mountainMaster.getMountainContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<%
-								ArrayList<ThreadFile> fileList = new ThreadFileDAO().getList(threadMaster.getThreadNo());
+								ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
 
-								for (ThreadFile file : fileList) {
-									out.write("<a href=\"" + request.getContextPath() + "/ThreadFileDownloadAction?file="
+								for (MountainFile file : fileList) {
+									out.write("<a href=\"" + request.getContextPath() + "/MountainFileDownloadAction?file="
 											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + file.getFileClientName()
 											//+ "(다운로드 횟수: " + file.getDownloadCount() 
 											+ "</a><br>");
@@ -93,19 +93,19 @@
 			<table class="table table-striped">
 				<tbody>
 					<%
-						ThreadReplyDAO threadReplyDAO = new ThreadReplyDAO();
-						ArrayList<ThreadReply> list = threadReplyDAO.getList(threadNo);
+						MountainReplyDAO mountainReplyDAO = new MountainReplyDAO();
+						ArrayList<MountainReply> list = mountainReplyDAO.getList(mountainNo);
 
 						for (int i = 0; i < list.size(); i++) {
 					%>
 					<tr>
-						<td align="center"><%=list.get(i).getThreadNo()%></td>
+						<td align="center"><%=list.get(i).getMountainNo()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<%
 							if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
 						%>
-						<td align="center"><a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="threadReplyDeleteAction.jsp?threadNo=<%=threadNo%>&replyID=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
+						<td align="center"><a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyID=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
 						</a></td>
 						<%
 							}
@@ -122,24 +122,24 @@
 		</div>
 
 		<table class="table table-condensed">
-			<form method="post" action="replyAction.jsp">
+			<form method="post" action="mountainReplyAction.jsp">
 				<tbody>
 					<td style="width: 90%;"><input type="text" class="form-control" palceholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
 					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
-					<input type="hidden" name="threadNo" value="<%=threadMaster.getThreadNo()%>">
+					<input type="hidden" name="mountainNo" value="<%=mountainMaster.getMountainNo()%>">
 				</tbody>
 			</form>
 		</table>
 
-		<a href="thread.jsp" class="btn btn-primary">목록</a>
+		<a href="mountain.jsp" class="btn btn-primary">목록</a>
 		<%
-			if (userID != null && userID.equals(threadMaster.getThreadMakeUser())) {
+			if (userID != null && userID.equals(mountainMaster.getMountainMakeUser())) {
 		%>
-		<a href="threadUpdate.jsp?threadNo=<%=threadNo%>" class="btn btn-priamry">수정</a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="threadDeleteAction.jsp?threadNo=<%=threadNo%>" class="btn btn-priamry">삭제</a>
+		<a href="mountainUpdate.jsp?mountainNo=<%=mountainNo%>" class="btn btn-priamry">수정</a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="mountainDeleteAction.jsp?mountainNo=<%=mountainNo%>" class="btn btn-priamry">삭제</a>
 		<%
 			}
 		%>
-		<a href="threadWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+		<a href="mountainWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
 
 	</div>
 

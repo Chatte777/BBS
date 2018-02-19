@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="threadMaster.ThreadMasterDAO"%>
-<%@ page import="threadMaster.ThreadMaster"%>
+<%@ page import="mountainMaster.MountainMasterDAO"%>
+<%@ page import="mountainMaster.MountainMaster"%>
 <%@ page import="java.io.PrintWriter"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -27,21 +27,21 @@
 				script.println("</script>");
 			}
 		
-			int threadNo = 0;
-			if(request.getParameter("threadNo") != null){
-				threadNo = Integer.parseInt(request.getParameter("threadNo"));
+			int mountainNo = 0;
+			if(request.getParameter("mountainNo") != null){
+				mountainNo = Integer.parseInt(request.getParameter("mountainNo"));
 			}
 		
-			if(threadNo == 0){
+			if(mountainNo == 0){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('유효하지 않은 글입니다.')");
-				script.println("location.href = 'thread.jsp'");
+				script.println("location.href = 'mountain.jsp'");
 				script.println("</script>"); 
 			}
 		
-			ThreadMaster threadMaster = new ThreadMasterDAO().getThreadMaster(threadNo);
-			if(!userID.equals(threadMaster.getThreadMakeUser())){
+			MountainMaster mountainMaster = new MountainMasterDAO().getMountainMaster(mountainNo);
+			if(!userID.equals(mountainMaster.getMountainMakeUser())){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('권한이 없습니다.')");
@@ -49,8 +49,8 @@
 				script.println("</script>"); 
 			} else {
 
-					ThreadMasterDAO threadMasterDAO = new ThreadMasterDAO();
-					int result = threadMasterDAO.delete(threadNo);
+					MountainMasterDAO mountainMasterDAO = new MountainMasterDAO();
+					int result = mountainMasterDAO.delete(mountainNo);
 					
 					if(result == -1){
 						PrintWriter script = response.getWriter();
@@ -63,7 +63,7 @@
 					{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.href='thread.jsp'");
+						script.println("location.href='mountain.jsp'");
 						script.println("</script>");
 					}
 			

@@ -1,4 +1,4 @@
-package threadMaster;
+package mountainMaster;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ThreadMasterDAO {
+public class MountainMasterDAO {
 
 	private Connection conn;
 	private ResultSet rs;
 	
-	public ThreadMasterDAO() {
+	public MountainMasterDAO() {
 		try {
 			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
@@ -39,7 +39,7 @@ public class ThreadMasterDAO {
 	}
 	
 	public int getNext(){
-		String SQL = "SELECT thread_no FROM thread_master ORDER BY thread_no DESC";
+		String SQL = "SELECT mountain_no FROM mountain_master ORDER BY mountain_no DESC";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -54,17 +54,17 @@ public class ThreadMasterDAO {
 		return -1; //Database error
 	}
 	
-	public int write(String threadTitle, String threadMakeUser, String threadContent){
-		String SQL = "INSERT INTO thread_master VALUES(?,?,?,?,?,?,?,?,?,?)";
+	public int write(String mountainTitle, String mountainMakeUser, String mountainContent){
+		String SQL = "INSERT INTO mountain_master VALUES(?,?,?,?,?,?,?,?,?,?)";
 		int tmpNextNo = getNext();
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, tmpNextNo);
-			pstmt.setString(2, threadTitle);
+			pstmt.setString(2, mountainTitle);
 			pstmt.setInt(3, 1);
-			pstmt.setString(4, threadContent);
-			pstmt.setString(5, threadMakeUser);
+			pstmt.setString(4, mountainContent);
+			pstmt.setString(5, mountainMakeUser);
 			pstmt.setString(6, getDate());
 			pstmt.setInt(7, 1);
 			pstmt.setInt(8, 1);
@@ -80,9 +80,9 @@ public class ThreadMasterDAO {
 		return -1; //Database error
 	}
 	
-	public ArrayList<ThreadMaster> getList(int pageNumber){
-		String SQL = "SELECT * from thread_master WHERE thread_no < ? AND thread_delete_yn = 1 ORDER BY thread_no DESC LIMIT 10";
-		ArrayList<ThreadMaster> list = new ArrayList<ThreadMaster>();
+	public ArrayList<MountainMaster> getList(int pageNumber){
+		String SQL = "SELECT * from mountain_master WHERE mountain_no < ? AND mountain_delete_yn = 1 ORDER BY mountain_no DESC LIMIT 10";
+		ArrayList<MountainMaster> list = new ArrayList<MountainMaster>();
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -91,18 +91,18 @@ public class ThreadMasterDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()){
-				ThreadMaster threadMaster = new ThreadMaster();
-				threadMaster.setThreadNo(rs.getInt(1));
-				threadMaster.setThreadTitle(rs.getString(2));
-				threadMaster.setThreadTm(rs.getInt(3));
-				threadMaster.setThreadContent(rs.getString(4));
-				threadMaster.setThreadMakeUser(rs.getString(5));
-				threadMaster.setThreadMakeDt(rs.getString(6));
-				threadMaster.setThreadReadCnt(rs.getInt(7));
-				threadMaster.setThreadLikeCnt(rs.getInt(8));
-				threadMaster.setThreadDislikeCnt(rs.getInt(9));
-				threadMaster.setThreadDeleteYn(rs.getInt(10));
-				list.add(threadMaster);
+				MountainMaster mountainMaster = new MountainMaster();
+				mountainMaster.setMountainNo(rs.getInt(1));
+				mountainMaster.setMountainTitle(rs.getString(2));
+				mountainMaster.setMountainTm(rs.getInt(3));
+				mountainMaster.setMountainContent(rs.getString(4));
+				mountainMaster.setMountainMakeUser(rs.getString(5));
+				mountainMaster.setMountainMakeDt(rs.getString(6));
+				mountainMaster.setMountainReadCnt(rs.getInt(7));
+				mountainMaster.setMountainLikeCnt(rs.getInt(8));
+				mountainMaster.setMountainDislikeCnt(rs.getInt(9));
+				mountainMaster.setMountainDeleteYn(rs.getInt(10));
+				list.add(mountainMaster);
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -111,7 +111,7 @@ public class ThreadMasterDAO {
 	}
 	
 	public boolean nextPage(int pageNumber){
-		String SQL = "SELECT * from thread_master WHERE thread_no < ? AND thread_delete_yn = 1";
+		String SQL = "SELECT * from mountain_master WHERE mountain_no < ? AND mountain_delete_yn = 1";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -128,29 +128,29 @@ public class ThreadMasterDAO {
 		return false; 
 	}
 	
-	public ThreadMaster getThreadMaster(int threadNo){
-		String SQL = "SELECT * from thread_master WHERE thread_no = ?";
+	public MountainMaster getMountainMaster(int mountainNo){
+		String SQL = "SELECT * from mountain_master WHERE mountain_no = ?";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, threadNo);
+			pstmt.setInt(1, mountainNo);
 			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				ThreadMaster threadMaster = new ThreadMaster();
-				threadMaster.setThreadNo(rs.getInt(1));
-				threadMaster.setThreadTitle(rs.getString(2));
-				threadMaster.setThreadTm(rs.getInt(3));
-				threadMaster.setThreadContent(rs.getString(4));
-				threadMaster.setThreadMakeUser(rs.getString(5));
-				threadMaster.setThreadMakeDt(rs.getString(6));
-				threadMaster.setThreadReadCnt(rs.getInt(7));
-				threadMaster.setThreadLikeCnt(rs.getInt(8));
-				threadMaster.setThreadDislikeCnt(rs.getInt(9));
-				threadMaster.setThreadDeleteYn(rs.getInt(10));
+				MountainMaster mountainMaster = new MountainMaster();
+				mountainMaster.setMountainNo(rs.getInt(1));
+				mountainMaster.setMountainTitle(rs.getString(2));
+				mountainMaster.setMountainTm(rs.getInt(3));
+				mountainMaster.setMountainContent(rs.getString(4));
+				mountainMaster.setMountainMakeUser(rs.getString(5));
+				mountainMaster.setMountainMakeDt(rs.getString(6));
+				mountainMaster.setMountainReadCnt(rs.getInt(7));
+				mountainMaster.setMountainLikeCnt(rs.getInt(8));
+				mountainMaster.setMountainDislikeCnt(rs.getInt(9));
+				mountainMaster.setMountainDeleteYn(rs.getInt(10));
 				
-				return threadMaster;
+				return mountainMaster;
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -158,16 +158,16 @@ public class ThreadMasterDAO {
 		return null; 
 	}
 	
-	public int update(int threadNo, String threadTitle, String threadContent){
-		String SQL = "UPDATE thread_master SET thread_title=?, thread_content=? WHERE thread_no=?";
+	public int update(int mountainNo, String mountainTitle, String mountainContent){
+		String SQL = "UPDATE mountain_master SET mountain_title=?, mountain_content=? WHERE mountain_no=?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, threadTitle);
-			pstmt.setString(2, threadContent);
-			pstmt.setInt(3, threadNo);
+			pstmt.setString(1, mountainTitle);
+			pstmt.setString(2, mountainContent);
+			pstmt.setInt(3, mountainNo);
 			
 			pstmt.executeUpdate();
-			return threadNo;
+			return mountainNo;
 			
 		} catch(Exception e){
 			e.printStackTrace();
@@ -175,11 +175,11 @@ public class ThreadMasterDAO {
 		return -1; //Database error
 	}
 	
-	public int delete(int threadNo){
-		String SQL = "UPDATE thread_Master SET thread_delete_yn=2 WHERE thread_no = ?";
+	public int delete(int mountaindNo){
+		String SQL = "UPDATE mountain_Master SET mountain_delete_yn=2 WHERE mountain_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, threadNo);
+			pstmt.setInt(1, mountaindNo);
 			
 			return pstmt.executeUpdate();
 		} catch(Exception e){
