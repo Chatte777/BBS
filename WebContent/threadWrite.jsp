@@ -34,7 +34,7 @@
 						<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+				<input type="submit" class="btn btn-primary pull-right" value="작성완료">
 			</form>
 		</div>
 	</div>
