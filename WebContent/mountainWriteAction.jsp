@@ -29,7 +29,7 @@
 		String mountainTitle = null;
 		String mountainContent = null;
 
-		String tmpDirDesktop = "C:/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
+		String tmpDirDesktop = "E:/Dropbox/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
 		String tmpDirLaptop = "C:/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
 		String directory = tmpDirDesktop;
 		int maxSize = 1024 * 1024 * 100;
