@@ -21,7 +21,7 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-		if (userID != null && userID.equals("slop1434")) {
+		if (userID != null && (userID.equals("slop1434") || userID.equals("chatte777"))) {
 	%>
 	<div class="container">
 		<div class="jumbotron">

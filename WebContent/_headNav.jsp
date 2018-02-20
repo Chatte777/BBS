@@ -25,7 +25,7 @@
 				class="icon-bar"></span>
 		</button>
 		<%
-			if (userID != null && userID.equals("slop1434")) {
+			if (userID != null && (userID.equals("slop1434") || userID.equals("chatte777"))) {
 		%>
 		<a class="navbar-brand" href="main.jsp">DREAMY CAT</a>
 		<%
@@ -44,7 +44,7 @@
 			<li><a href="bbs.jsp">공지 및 건의</a></li>
 			<li><a href="mountain.jsp">산악일기</a></li>
 			<%
-				if (userID != null && userID.equals("slop1434")) {
+				if (userID != null && (userID.equals("slop1434") || userID.equals("chatte777"))) {
 			%>
 			<li><a href="thread.jsp">대화의 숲</a></li>
 			<%
