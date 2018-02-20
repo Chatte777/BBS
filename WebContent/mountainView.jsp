@@ -119,7 +119,7 @@
 						for (int i = 0; i < list.size(); i++) {
 					%>
 					<tr>
-						<td align="center"><%=list.get(i).getMountainNo()%></td>
+						<td align="center"><%=list.get(i).getReplyNo()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<%
