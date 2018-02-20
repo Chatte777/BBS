@@ -11,7 +11,7 @@ public class MountainFileDAO {
 
 	public MountainFileDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/bbs";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/bbs";
 			String dbID = "root";
 			String dbPassword = "root";
 
@@ -23,7 +23,7 @@ public class MountainFileDAO {
 	}
 	
 	public int getNext(int mountainNo){
-		String SQL = "SELECT COUNT(file_no) FROM mountain_file WHERE mountainNo=?";
+		String SQL = "SELECT COUNT(file_no) FROM mountain_file WHERE mountain_no=?";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

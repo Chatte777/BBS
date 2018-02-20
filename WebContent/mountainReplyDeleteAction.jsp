@@ -38,7 +38,7 @@
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('유효하지 않은 글입니다.')");
-				script.println("location.href = 'bbs.jsp'");
+				script.println("location.href = 'mountain.jsp'");
 				script.println("</script>"); 
 			}
 
@@ -53,7 +53,7 @@
 				script.println("</script>"); 
 			} else {
 
-					int result = mountainReplyDAO.delete(Integer.parseInt(request.getParameter("replyNo")), replyNo);
+					int result = mountainReplyDAO.delete(Integer.parseInt(request.getParameter("mountainNo")), replyNo);
 					
 					if(result == -1){
 						PrintWriter script = response.getWriter();
@@ -66,7 +66,7 @@
 					{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.href='mountain.jsp?mountainNo=" + request.getParameter("mountainNo") + "'");
+						script.println("location.href='mountainView.jsp?mountainNo=" + request.getParameter("mountainNo") + "'");
 						script.println("</script>");
 					}
 			
