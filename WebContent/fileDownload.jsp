@@ -12,7 +12,9 @@
 <title>DREAMY CAT</title>
 </head>
 <body>
+	<!-- 
 	<%
+	/*
 		ArrayList<FileDTO> fileList = new FileDAO().getList();
 	
 		for(FileDTO file : fileList) {
@@ -20,6 +22,8 @@
 		java.net.URLEncoder.encode(file.getFileRealName(), "UTF-8") + "\">" +
 					file.getFileName() + "(다운로드 횟수: " + file.getDownloadCount() + ")</a><br>");
 		}
+	*/
 	%>
+	 -->
 </body>
 </html>

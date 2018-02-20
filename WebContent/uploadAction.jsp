@@ -17,6 +17,7 @@
 </head>
 <body>
 	<%
+	/*
 	//String directory = application.getRealPath("/upload/");
 	String directory = "E:/Server/uploadFile/uploadFile";
 	int maxSize = 1024 * 1024 * 100;
@@ -55,6 +56,7 @@
 			script.println("</script>");	
 		}
 	}
+	*/
 	%>
 </body>
 </html>
