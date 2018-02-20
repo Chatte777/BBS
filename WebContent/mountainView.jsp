@@ -70,13 +70,32 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="3" style="min-height: 200px; text-align: left;"><%=mountainMaster.getMountainContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
-					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
+						<td colspan="3" style="min-height: 200px; text-align: center;">
+						<div class="row">
+						<%
+								ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
+
+								for (MountainFile file : fileList) {
+									%>
+									<div style="width:100%; text-algin:center;">
+									<%
+									out.write("<img src=\"E:/Server/uploadFile/mountainFile/" 
+											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\" style=\"width:100%; max-width:760px; vertical-align:middle\">"
+											+ "</a><br><br>");
+									%>
+							</div>
+									<%
+								}
+							%>
+							</div>
+							<p class="text-left">
+						<%=mountainMaster.getMountainContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></p></td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<%
-								ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
+								//ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
 
 								for (MountainFile file : fileList) {
 									out.write("<a href=\"" + request.getContextPath() + "/MountainFileDownloadAction?file="
@@ -125,7 +144,7 @@
 		<table class="table table-condensed">
 			<form method="post" action="mountainReplyAction.jsp">
 				<tbody>
-					<td style="width: 90%;"><input type="text" class="form-control" palceholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
+					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
 					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
 					<input type="hidden" name="mountainNo" value="<%=mountainMaster.getMountainNo()%>">
 				</tbody>
