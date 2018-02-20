@@ -75,26 +75,20 @@
 								ArrayList<ThreadFile> fileList = new ThreadFileDAO().getList(threadMaster.getThreadNo());
 
 								for (ThreadFile file : fileList) {
-									out.write("<img src=\"images/uploadFile/threadFile/"
-											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + "</a><br><br>");
-								}
 							%>
+							<div style="width: 100%; text-algin: center;">
+								<%
+									out.write("<img src=\"images/uploadFile/mountainFile/"
+												+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8")
+												+ "\" style=\"width:100%; max-width:760px; vertical-align:middle\">" + "</a><br><br>");
+								%>
+							</div> <%
+ 	}
+ %>
+
 							<p class="text-left">
 								<%=threadMaster.getThreadContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></p>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<%
-								for (ThreadFile file : fileList) {
-									out.write("<a href=\"" + request.getContextPath() + "/ThreadFileDownloadAction?file="
-											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">"
-											+ file.getFileClientName()
-											//+ "(다운로드 횟수: " + file.getDownloadCount() 
-											+ "</a><br>");
-								}
-							%>
 						</td>
 					</tr>
 				</tbody>

@@ -29,12 +29,11 @@
 		String mountainTitle = null;
 		String mountainContent = null;
 
-		String directory = "images/uploadFile/mountainFile";
+		String directory = "C:/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 
-		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding,
-				new DefaultFileRenamePolicy());
+		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding, new DefaultFileRenamePolicy());
 
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
