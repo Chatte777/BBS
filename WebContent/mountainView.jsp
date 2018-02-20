@@ -79,7 +79,7 @@
 									%>
 									<div style="width:100%; text-algin:center;">
 									<%
-									out.write("<img src=\"E:/Server/uploadFile/mountainFile/" 
+									out.write("<img src=\"images/uploadFile/mountainFile/" 
 											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\" style=\"width:100%; max-width:760px; vertical-align:middle\">"
 											+ "</a><br><br>");
 									%>

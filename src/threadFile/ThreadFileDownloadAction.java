@@ -34,7 +34,7 @@ public class ThreadFileDownloadAction extends HttpServlet {
 		
 		String fileName = request.getParameter("file");
 		//String directory = this.getServletContext().getRealPath("/upload/");
-		String directory = "E:/Server/uploadFile/threadFile";
+		String directory = "images/uploadFile/threadFile";
 		File file = new File(directory + "/" + fileName);
 		
 		String mimeType = getServletContext().getMimeType(file.toString());

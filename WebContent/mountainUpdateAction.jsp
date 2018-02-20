@@ -26,7 +26,7 @@
 		String mountainTitle = null;
 		String mountainContent = null;
 
-		String directory = "E:/Server/uploadFile/mountainFile";
+		String directory = "images/uploadFile/mountainFile";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 

@@ -75,7 +75,7 @@
 								ArrayList<ThreadFile> fileList = new ThreadFileDAO().getList(threadMaster.getThreadNo());
 
 								for (ThreadFile file : fileList) {
-									out.write("<img src=\"E:/Server/uploadFile/threadFile/"
+									out.write("<img src=\"images/uploadFile/threadFile/"
 											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + "</a><br><br>");
 								}
 							%>

@@ -29,7 +29,7 @@
 		String threadTitle = null;
 		String threadContent = null;
 
-		String directory = "E:/Server/uploadFile/threadFile";
+		String directory = "images/uploadFile/threadFile";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 

@@ -30,7 +30,7 @@
 		String bbsTitle = null;
 		String bbsContent = null;
 
-		String directory = "E:/Server/uploadFile/uploadFile";
+		String directory = "images/uploadFile/uploadFile";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 

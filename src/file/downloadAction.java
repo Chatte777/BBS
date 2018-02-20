@@ -32,7 +32,7 @@ public class downloadAction extends HttpServlet {
 		
 		String fileName = request.getParameter("file");
 		//String directory = this.getServletContext().getRealPath("/upload/");
-		String directory = "E:/Server/uploadFile/uploadFile";
+		String directory = "images/uploadFile/uploadFile";
 		File file = new File(directory + "/" + fileName);
 		
 		String mimeType = getServletContext().getMimeType(file.toString());
