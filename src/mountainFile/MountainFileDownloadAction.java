@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import file.FileDAO;
 
 /**
- * Servlet implementation class DownloadAction
+ * Servlet implementation class MountainFileDownloadAction
  */
-@WebServlet("/DownloadAction")
+@WebServlet("/MountainFileDownloadAction")
 public class MountainFileDownloadAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,6 @@ public class MountainFileDownloadAction extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String fileName = request.getParameter("file");
 		//String directory = this.getServletContext().getRealPath("/upload/");
 		String directory = "E:/Server/uploadFile/mountainFile";

@@ -31,7 +31,7 @@
 		<%
 			} else {
 		%>
-		<a class="navbar-brand" href="main.jsp">건전한 주식투자</a>
+		<a class="navbar-brand" href="main.jsp">MyLogs</a>
 		<%
 			}
 		%>

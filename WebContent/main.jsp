@@ -70,11 +70,10 @@
 	<div class="container">
 		<div class="jumbotron">
 			<div class="container">
-				<h1>웹 사이트 소개</h1>
-				<a>이 웹 사이트는 건전한 주식투자를 위해 마련된 사이트입니다.</a>
+				<h1>사이트 소개</h1>
+				<a>이 웹 사이트는 각자의 이야기들을 기록하기 위해 만들어진 사이트입니다.</a>
 				<p>
-					<a class="btn btn-primary btn-pull" href="#" role="button">자세히
-						알아보기</a>
+					<a class="btn btn-primary btn-pull" href="#" role="button">임시버튼</a>
 				</p>
 			</div>
 		</div>
