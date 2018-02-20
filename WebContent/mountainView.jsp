@@ -70,7 +70,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="3" style="min-height: 200px; text-align: center;">
+						<td colspan="3" style="min-height: 200px; text-align: center;"> 
 						<div class="row">
 						<%
 								ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
