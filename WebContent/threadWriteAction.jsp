@@ -80,10 +80,8 @@
 							continue;
 
 						String fileNameLowerCase = fileClientName.toLowerCase();
-						if (!fileNameLowerCase.endsWith(".doc") && !fileNameLowerCase.endsWith(".hwp")
-								&& !fileNameLowerCase.endsWith(".jpg") && !fileNameLowerCase.endsWith(".gif")
-								&& !fileNameLowerCase.endsWith(".png") && !fileNameLowerCase.endsWith(".pdf")
-								&& !fileNameLowerCase.endsWith(".xls") && !fileNameLowerCase.endsWith(".jpeg")) {
+						if (!fileNameLowerCase.endsWith(".jpg") && !fileNameLowerCase.endsWith(".gif")
+								&& !fileNameLowerCase.endsWith(".png") && !fileNameLowerCase.endsWith(".jpeg")) {
 							File file = new File(directory + fileServerName);
 							System.gc();
 							file.delete();

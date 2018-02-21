@@ -60,11 +60,11 @@
 					<tr>
 						<td
 						<%
-							if(replyColorFlag==1){%> style="color:purple;"<%}
-							else if(replyColorFlag==2){%> style="color:red;"<%}
-							else if(replyColorFlag==3){%> style="color:orange;"<%}
-							else if(replyColorFlag==4){%> style="color:green;"<%}
-							else if(replyColorFlag==5){%> style="color:blue;"<%}
+							if(replyColorFlag==1){%> style="color:#873286;"<%}
+							else if(replyColorFlag==2){%> style="color:#DE2A45;"<%}
+							else if(replyColorFlag==3){%> style="color:#F5762C;"<%}
+							else if(replyColorFlag==4){%> style="color:#10BF00;"<%}
+							else if(replyColorFlag==5){%> style="color:#2865BF;"<%}
 							else if(replyColorFlag==6){%> style="color:black;"<%}
 						%>>
 						<%if(replyCnt!=0){%><%=replyCnt%><%}%></td>

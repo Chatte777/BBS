@@ -107,14 +107,16 @@
 						<td align="center"><%=list.get(i).getReplyNo()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
+						<td align="center">
 						<%
 							if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
 						%>
-						<td align="center"><a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
-						</a></td>
+						<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
+						</a>
 						<%
 							}
 						%>
+						</td>
 						<td style="width: 10%;"><%=list.get(i).getReplyMakeUser()%></td>
 						<td style="width: 15%;"><%=list.get(i).getReplyMakeDt().substring(0, 11) + list.get(i).getReplyMakeDt().substring(11, 13)
 						+ "시" + list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>

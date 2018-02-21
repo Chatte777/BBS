@@ -74,7 +74,7 @@
 						<td colspan="3" style="min-height: 200px; text-align: left;"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
 					.replaceAll("\n", "<br>")%></td>
 					</tr>
-					
+
 					<tr>
 						<td colspan="2">
 							<%
@@ -104,15 +104,13 @@
 						<td align="center"><%=list.get(i).getReplyID()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
-						<%
-							if (userID != null && userID.equals(list.get(i).getUserID())) {
-						%>
 						<td align="center">
-							<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a>
-						</td>
-						<%
+							<%
+							if (userID != null && userID.equals(list.get(i).getUserID())) {
+						%> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a> <%
 							}
 						%>
+						</td>
 						<td style="width: 10%;"><%=list.get(i).getUserID()%></td>
 						<td style="width: 15%;"><%=list.get(i).getReplyDate().substring(0, 11) + list.get(i).getReplyDate().substring(11, 13)
 						+ "시" + list.get(i).getReplyDate().substring(14, 16) + "분"%></td>
@@ -129,26 +127,20 @@
 
 				<tbody>
 					<tr>
-						<td style="width: 90%;">
-							<input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;">
-						</td>
+						<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
 					</tr>
 					<tr>
-						<td style="width: 10%; vertical-align: bottom;" align="center">
-							<input type="submit" class="btn btn-primary pull-right" value="댓글작성">
-						</td>
+						<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
 					</tr>
 					<tr>
-						<td>
-							<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
-						</td>
+						<td><input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>"></td>
 					</tr>
 				</tbody>
 
 			</table>
 		</form>
-		
-		
+
+
 		<a href="bbs.jsp" class="btn btn-primary">목록</a>
 		<%
 			if (userID != null && userID.equals(bbs.getUserID())) {
