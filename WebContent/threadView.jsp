@@ -88,7 +88,7 @@
 							%>
 
 							<p class="text-left">
-								<%=mountainMaster.getMountainContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+								<%=threadMaster.getThreadContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></p>
 						</td>
 					</tr>
