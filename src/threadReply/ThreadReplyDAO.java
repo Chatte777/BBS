@@ -1,6 +1,6 @@
 package threadReply;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,11 +38,11 @@ public class ThreadReplyDAO {
 		return ""; //Database error
 	}
 	
-	public int getNext(int bbsID){
+	public int getNext(int threadNo){
 		String SQL = "SELECT count(1) FROM thread_reply WHERE thread_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, bbsID);
+			pstmt.setInt(1, threadNo);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
@@ -56,7 +56,7 @@ public class ThreadReplyDAO {
 	}
 	
 	public int write(int threadNo, String replyMakeUser, String replyContent){
-		String SQL = "INSERT INTO mountain_reply VALUES(?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO thread_reply VALUES(?,?,?,?,?,?,?,?)";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, threadNo);

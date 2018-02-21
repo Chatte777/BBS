@@ -8,7 +8,7 @@
 
 <jsp:useBean id="threadMaster" class="threadMaster.ThreadMaster" scope="page"/>
 <jsp:useBean id="threadReply" class="threadReply.ThreadReply" scope="page"/> 
-<jsp:setProperty name="thread" property="threadNo"/>
+<jsp:setProperty name="threadMaster" property="threadNo"/>
 <jsp:setProperty name="threadReply" property="replyContent"/>
 
 <!DOCTYPE html>
