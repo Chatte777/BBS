@@ -13,7 +13,7 @@ public class ThreadMasterDAO {
 	
 	public ThreadMasterDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -186,5 +186,25 @@ public class ThreadMasterDAO {
 			e.printStackTrace();
 		}
 		return -1; //Database error
+	}
+
+	public int getReplyCnt(int threadNo) {
+		String SQL = "SELECT COUNT(1) from thread_reply WHERE thread_no=? and reply_delete_yn=1";
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, threadNo);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int replyCnt = rs.getInt(1);
+
+				return replyCnt;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

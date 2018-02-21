@@ -41,7 +41,7 @@
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">댓글</th>
 						<th style="background-color: #eeeeee; text-align: center;">제목</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -54,9 +54,11 @@
 					ArrayList<ThreadMaster> list = threadMasterDAO.getList(pageNumber);
 					
 					for(int i=0; i<list.size(); i++){
+						int replyCnt=threadMasterDAO.getReplyCnt(list.get(i).getThreadNo()); 
+								
 				%>
 					<tr>
-						<td><%= list.get(i).getThreadNo() %></td>
+						<td><%if(replyCnt!=0){%><%=replyCnt%><%}%></td>
 						<td><a href="threadView.jsp?threadNo=<%= list.get(i).getThreadNo() %>"><%= list.get(i).getThreadTitle() %></a></td>
 						<td><%= list.get(i).getThreadMakeUser() %></td>
 						<td><%= list.get(i).getThreadMakeDt().substring(0,11)+list.get(i).getThreadMakeDt().substring(11,13)+"시"+list.get(i).getThreadMakeDt().substring(14,16)+"분" %></td>

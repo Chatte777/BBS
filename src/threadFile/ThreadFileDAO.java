@@ -11,7 +11,7 @@ public class ThreadFileDAO {
 
 	public ThreadFileDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/bbs";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/bbs";
 			String dbID = "root";
 			String dbPassword = "root";
 
@@ -23,7 +23,7 @@ public class ThreadFileDAO {
 	}
 	
 	public int getNext(int threadNo){
-		String SQL = "SELECT COUNT(file_no) FROM thread_file WHERE thread_no=?";
+		String SQL = "SELECT COUNT(1) FROM thread_file WHERE thread_no=?";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

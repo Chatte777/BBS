@@ -13,7 +13,7 @@ public class BbsDAO {
 	
 	public BbsDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -174,5 +174,25 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; //Database error
+	}
+	
+	public int getReplyCnt(int bbsID) {
+		String SQL = "SELECT COUNT(1) from reply WHERE bbsID=? and replyAvailable=1";
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsID);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int replyCnt = rs.getInt(1);
+
+				return replyCnt;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

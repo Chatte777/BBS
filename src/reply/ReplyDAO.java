@@ -13,7 +13,7 @@ public class ReplyDAO {
 	
 	public ReplyDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class ReplyDAO {
 	}
 	
 	public int getNext(int bbsID){
-		String SQL = "SELECT count(replyID) FROM reply WHERE bbsID = ?";
+		String SQL = "SELECT count(1) FROM reply WHERE bbsID = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);

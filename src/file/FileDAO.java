@@ -11,7 +11,7 @@ public class FileDAO {
 
 	public FileDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/bbs";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/bbs";
 			String dbID = "root";
 			String dbPassword = "root";
 
@@ -23,7 +23,7 @@ public class FileDAO {
 	}
 	
 	public int getNext(int threadNo){
-		String SQL = "SELECT COUNT(file_no) FROM file WHERE bbsID=?";
+		String SQL = "SELECT COUNT(1) FROM file WHERE bbsID=?";
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

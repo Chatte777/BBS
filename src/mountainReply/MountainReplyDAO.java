@@ -13,7 +13,7 @@ public class MountainReplyDAO {
 	
 	public MountainReplyDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BBS";
+			String dbURL = "jdbc:mysql://122.42.239.89:3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class MountainReplyDAO {
 	}
 	
 	public int getNext(int mountainNo){
-		String SQL = "SELECT count(reply_no) FROM mountain_reply WHERE mountain_no = ?";
+		String SQL = "SELECT count(1) FROM mountain_reply WHERE mountain_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, mountainNo);

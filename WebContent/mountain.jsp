@@ -41,7 +41,7 @@
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">댓글</th>
 						<th style="background-color: #eeeeee; text-align: center;">제목</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -54,9 +54,20 @@
 					ArrayList<MountainMaster> list = mountainMasterDAO.getList(pageNumber);
 					
 					for(int i=0; i<list.size(); i++){
+						int replyCnt = mountainMasterDAO.getReplyCnt(list.get(i).getMountainNo());
+						int replyColorFlag = mountainMasterDAO.getReplyColor(list.get(i).getMountainNo());
 				%>
 					<tr>
-						<td><%= list.get(i).getMountainNo() %></td>
+						<td
+						<%
+							if(replyColorFlag==1){%> style="color:purple;"<%}
+							else if(replyColorFlag==2){%> style="color:red;"<%}
+							else if(replyColorFlag==3){%> style="color:orange;"<%}
+							else if(replyColorFlag==4){%> style="color:green;"<%}
+							else if(replyColorFlag==5){%> style="color:blue;"<%}
+							else if(replyColorFlag==6){%> style="color:black;"<%}
+						%>>
+						<%if(replyCnt!=0){%><%=replyCnt%><%}%></td>
 						<td><a href="mountainView.jsp?mountainNo=<%= list.get(i).getMountainNo() %>"><%= list.get(i).getMountainTitle() %></a></td>
 						<td><%= list.get(i).getMountainMakeUser() %></td>
 						<td><%= list.get(i).getMountainMakeDt().substring(0,11)+list.get(i).getMountainMakeDt().substring(11,13)+"시"+list.get(i).getMountainMakeDt().substring(14,16)+"분" %></td>
