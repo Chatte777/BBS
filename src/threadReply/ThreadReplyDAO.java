@@ -54,18 +54,19 @@ public class ThreadReplyDAO {
 		}
 		return -1; //Database error
 	}
-
 	
 	public int write(int threadNo, String replyMakeUser, String replyContent){
-		String SQL = "INSERT INTO thread_reply VALUES(?,?,?,?,?,?)";
+		String SQL = "INSERT INTO mountain_reply VALUES(?,?,?,?,?,?,?,?)";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, threadNo);
 			pstmt.setInt(2, getNext(threadNo));
-			pstmt.setString(3, replyMakeUser);
-			pstmt.setString(4, getDate());
-			pstmt.setString(5, replyContent);
+			pstmt.setString(3, replyContent);
+			pstmt.setString(4, replyMakeUser);
+			pstmt.setString(5, getDate());
 			pstmt.setInt(6, 1);
+			pstmt.setInt(7, 1);
+			pstmt.setInt(8, 1);
 			
 			return pstmt.executeUpdate();
 			
