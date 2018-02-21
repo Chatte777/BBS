@@ -129,7 +129,7 @@
 		</div>
 
 		<table class="table table-condensed">
-			<form method="post" action="replyAction.jsp">
+			<form method="post" action="threadReplyAction.jsp">
 				<tbody>
 					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
 					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
