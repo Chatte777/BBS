@@ -65,8 +65,9 @@
 					</tr>
 					<tr>
 						<td>작성일자</td>
-						<td colspan="3"><%=mountainMaster.getMountainMakeDt().substring(0, 11) + mountainMaster.getMountainMakeDt().substring(11, 13)
-					+ "시" + mountainMaster.getMountainMakeDt().substring(14, 16) + "분"%></td>
+						<td colspan="3"><%=mountainMaster.getMountainMakeDt().substring(0, 11)
+					+ mountainMaster.getMountainMakeDt().substring(11, 13) + "시"
+					+ mountainMaster.getMountainMakeDt().substring(14, 16) + "분"%></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -75,17 +76,17 @@
 								ArrayList<MountainFile> fileList = new MountainFileDAO().getList(mountainMaster.getMountainNo());
 
 								for (MountainFile file : fileList) {
-									%>
+							%>
 							<div style="width: 100%; text-algin: center;">
 								<%
-									out.write("<img src=\"images/uploadFile/mountainFile/" 
-											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\" style=\"width:100%; max-width:760px; vertical-align:middle\">"
-											+ "</a><br><br>");						
+									out.write("<img src=\"images/uploadFile/mountainFile/"
+												+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8")
+												+ "\" style=\"width:100%; max-width:760px; vertical-align:middle\">" + "</a><br><br>");
 								%>
 
 							</div> <%
-								}
-							%>
+ 	}
+ %>
 
 							<p class="text-left">
 								<%=mountainMaster.getMountainContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
@@ -108,24 +109,22 @@
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<td align="center">
-						<%
-							if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-						%>
-						<a href="mountainView.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="glyphicon glyphicon-pencil" aria-label="close"> <span aria-hidden="true">&times;</span>
-						</a>
-						<%
-							}
-						%>
+							<%
+								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
+							%>
+							<a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil"/>
+								<%
+									}
+								%>
+							
 						</td>
 						<td align="center">
-						<%
-							if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-						%>
-						<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
-						</a>
-						<%
-							}
-						%>
+							<%
+								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
+							%> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
+						</a> <%
+ 	}
+ %>
 						</td>
 						<td style="width: 10%;"><%=list.get(i).getReplyMakeUser()%></td>
 						<td style="width: 15%;"><%=list.get(i).getReplyMakeDt().substring(0, 11) + list.get(i).getReplyMakeDt().substring(11, 13)
@@ -139,10 +138,10 @@
 		</div>
 
 		<table class="table table-condensed">
-			<form method="post" action="mountainReplyAction.jsp">
+			<form name="replyForm">
 				<tbody>
-					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
-					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
+					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
+					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
 					<input type="hidden" name="mountainNo" value="<%=mountainMaster.getMountainNo()%>">
 				</tbody>
 			</form>
@@ -163,7 +162,28 @@
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-</body>
-</html>
+
+	<script>
+	var updateFlag=1;
+	var _replyNo=0;
+	
+function myFunction(replyContent, replyNo) {
+	updateFlag=2;
+	_replyNo=replyNo;
+	document.getElementById("replyContent").value = replyContent;
+}
+
+function replySubmit(){
+	if(updateFlag==1){
+		document.replyForm.action="mountainReplyAction.jsp";
+		document.replyForm.method="post";
+		document.replyForm.submit();
+	} else if(updateFlag==2) {
+		document.replyForm.action="mountainReplyUpdateAction.jsp?replyNo=" + _replyNo;
+		document.replyForm.method="post";
+		document.replyForm.submit();
+	}
+}
+</script>
 </body>
 </html>

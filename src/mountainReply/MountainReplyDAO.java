@@ -136,23 +136,6 @@ public class MountainReplyDAO {
 		return null; 
 	}
 	
-
-	public int update(int mountainNo, int replyNo, String replyContent){
-		String SQL = "UPDATE mountain_reply SET reply_content=? WHERE mountain_no=? and reply_no=?";
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, replyContent);
-			pstmt.setInt(2, replyNo);
-			
-			return pstmt.executeUpdate();
-			
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return -1; //Database error
-	}
-	
-	
 	public int delete(int mountainNo, int replyNo){
 		String SQL = "UPDATE mountain_reply SET reply_delete_yn=2 WHERE mountain_no = ? and reply_no = ?";
 		try{
@@ -161,6 +144,22 @@ public class MountainReplyDAO {
 			pstmt.setInt(2, replyNo);
 			
 			return pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return -1; //Database error
+	}
+	
+	public int update(int mountainNo, int replyNo, String replyContent){
+		String SQL = "UPDATE mountain_reply SET reply_content=? WHERE mountain_no=? and reply_no=?";
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2, mountainNo);
+			pstmt.setInt(3, replyNo);
+			
+			return pstmt.executeUpdate();
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
