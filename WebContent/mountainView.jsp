@@ -108,21 +108,13 @@
 						<td align="center"><%=list.get(i).getReplyNo()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
-						<td align="center">
+						<td align="center" style="width: 5%;">
 							<%
 								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
 							%>
-							<a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil"/>
-								<%
-									}
-								%>
-							
-						</td>
-						<td align="center">
-							<%
-								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-							%> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span>
-						</a> <%
+							<a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color:#cccccc"/>
+							<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"/> <span aria-hidden="true">&times;</span>
+						 <%
  	}
  %>
 						</td>
