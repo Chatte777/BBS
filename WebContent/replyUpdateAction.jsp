@@ -10,7 +10,7 @@
 <jsp:useBean id="reply" class="reply.Reply" scope="page"/> 
 <jsp:setProperty name="bbs" property="bbsID"/>
 <jsp:setProperty name="reply" property="replyContent"/>
-
+<jsp:setProperty name="reply" property="replyID"/>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@
 				
 			} else {
 				ReplyDAO replyDAO = new ReplyDAO();
-				int result = replyDAO.write(bbs.getBbsID(), userID, reply.getReplyContent());
+				int result = replyDAO.update(bbs.getBbsID(), reply.getReplyID(), reply.getReplyContent());
 				
 				if(result == -1){
 					PrintWriter script = response.getWriter();

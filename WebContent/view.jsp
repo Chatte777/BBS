@@ -78,11 +78,12 @@
 					<tr>
 						<td colspan="2">
 							<%
-							ArrayList<FileDTO> fileList = new FileDAO().getList(bbs.getBbsID());
+								ArrayList<FileDTO> fileList = new FileDAO().getList(bbs.getBbsID());
 
 								for (FileDTO file : fileList) {
 									out.write("<a href=\"" + request.getContextPath() + "/downloadAction?file="
-											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">" + file.getFileClientName()
+											+ java.net.URLEncoder.encode(file.getFileServerName(), "UTF-8") + "\">"
+											+ file.getFileClientName()
 											//+ "(다운로드 횟수: " + file.getDownloadCount() 
 											+ "</a><br>");
 								}
@@ -104,12 +105,12 @@
 						<td align="center"><%=list.get(i).getReplyID()%></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
-						<td align="center">
+						<td align="center" style="width: 5%;">
 							<%
-							if (userID != null && userID.equals(list.get(i).getUserID())) {
-						%> <a onclick="return confirm('정말로 삭제하시겠습니까?')" href="replyDeleteAction.jsp?bbsID=<%=bbsID%>&replyID=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a> <%
-							}
-						%>
+								if (userID != null && userID.equals(list.get(i).getUserID())) {
+							%> <a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyID()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc"></a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="deleteAction.jsp?bbsId=<%=bbsID%>&replyNo=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a> <%
+ 	}
+ %>
 						</td>
 						<td style="width: 10%;"><%=list.get(i).getUserID()%></td>
 						<td style="width: 15%;"><%=list.get(i).getReplyDate().substring(0, 11) + list.get(i).getReplyDate().substring(11, 13)
@@ -122,23 +123,17 @@
 			</table>
 		</div>
 
-		<form method="post" action="replyAction.jsp">
-			<table class="table table-condensed">
 
+		<table class="table table-condensed">
+			<form name="replyForm">
 				<tbody>
-					<tr>
-						<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" maxlength="2048" style="height: 150px;"></td>
-					</tr>
-					<tr>
-						<td style="width: 10%; vertical-align: bottom;" align="center"><input type="submit" class="btn btn-primary pull-right" value="댓글작성"></td>
-					</tr>
-					<tr>
-						<td><input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>"></td>
-					</tr>
+					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
+					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
+					<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
 				</tbody>
+			</form>
+		</table>
 
-			</table>
-		</form>
 
 
 		<a href="bbs.jsp" class="btn btn-primary">목록</a>
@@ -156,3 +151,28 @@
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+
+	<script>
+		var updateFlag = 1;
+		var _replyId = 0;
+
+		function myFunction(replyContent, replyId) {
+			updateFlag = 2;
+			_replyId = replyId;
+			document.getElementById("replyContent").value = replyContent;
+		}
+
+		function replySubmit() {
+			if (updateFlag == 1) {
+				document.replyForm.action = "replyAction.jsp";
+				document.replyForm.method = "post";
+				document.replyForm.submit();
+			} else if (updateFlag == 2) {
+				document.replyForm.action = "replyUpdateAction.jsp?replyID=" + _replyId;
+				document.replyForm.method = "post";
+				document.replyForm.submit();
+			}
+		}
+	</script>
+</body>
+</html>

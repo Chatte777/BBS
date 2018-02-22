@@ -130,23 +130,6 @@ public class ReplyDAO {
 		return null; 
 	}
 	
-
-	public int update(int bbsID, int replyID, String replyContent){
-		String SQL = "UPDATE reply SET replyContent=? WHERE bbsID=? and replyID=?";
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, replyContent);
-			pstmt.setInt(2, replyID);
-			
-			return pstmt.executeUpdate();
-			
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return -1; //Database error
-	}
-	
-	
 	public int delete(int bbsID, int replyID){
 		String SQL = "UPDATE REPLY SET replyAvailable=0 WHERE bbsID = ? and replyID = ?";
 		try{
@@ -155,6 +138,22 @@ public class ReplyDAO {
 			pstmt.setInt(2, replyID);
 			
 			return pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return -1; //Database error
+	}
+	
+	public int update(int bbsId, int replyId, String replyContent){
+		String SQL = "UPDATE reply SET replyContent=? WHERE bbsId=? and replyID=?";
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2, bbsId);
+			pstmt.setInt(3, replyId);
+			
+			return pstmt.executeUpdate();
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
