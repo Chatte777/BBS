@@ -30,7 +30,10 @@
 		String bbsTitle = null;
 		String bbsContent = null;
 
-		String directory = "images/uploadFile/uploadFile";
+		String tmpDirDesktop = "E:/Dropbox/Workspace/Eclipse/BBS/WebContent/images/uploadFile/uploadFile/";
+		String tmpDirLaptop = "C:/Workspace/Eclipse/BBS/WebContent/images/uploadFile/uploadFile/";
+		String directory = tmpDirDesktop;
+		
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 
