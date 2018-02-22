@@ -135,23 +135,6 @@ public class ThreadReplyDAO {
 		return null; 
 	}
 	
-
-	public int update(int threadNo, int replyNo, String replyContent){
-		String SQL = "UPDATE thread_reply SET reply_content=? WHERE thread_no=? and reply_no=?";
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, replyContent);
-			pstmt.setInt(2, replyNo);
-			
-			return pstmt.executeUpdate();
-			
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-		return -1; //Database error
-	}
-	
-	
 	public int delete(int threadNo, int replyNo){
 		String SQL = "UPDATE thread_reply SET reply_delete_yn=0 WHERE thread_no = ? and reply_no = ?";
 		try{
@@ -160,6 +143,22 @@ public class ThreadReplyDAO {
 			pstmt.setInt(2, replyNo);
 			
 			return pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return -1; //Database error
+	}
+	
+	public int update(int threadNo, int replyNo, String replyContent){
+		String SQL = "UPDATE thread_reply SET reply_content=? WHERE thread_no=? and reply_no=?";
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2, threadNo);
+			pstmt.setInt(3, replyNo);
+			
+			return pstmt.executeUpdate();
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
