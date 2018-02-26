@@ -4,7 +4,7 @@
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="java.util.ArrayList" %>
- 
+  
 
 
 <!DOCTYPE html>
