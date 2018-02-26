@@ -1,6 +1,6 @@
 package user;
 
-import java.net.InetAddress;
+import java.net.InetAddress;	
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class UserDAO {
 		try {
 			String ipStr;
 			InetAddress ip = InetAddress.getLocalHost();
-			if(ip.toString().equals("192.168.219.90")) ipStr="localhost";
+			if(ip.toString().equals("KoreaUniv-PC/192.168.219.90")) ipStr="localhost";
 			else ipStr = "122.42.239.89";
 			
 			String dbURL = "jdbc:mysql://" +ipStr+ ":3306/BBS";
