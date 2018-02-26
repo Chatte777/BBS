@@ -1,5 +1,6 @@
 package mountainFile;
 
+import java.net.InetAddress;
 import java.sql.Connection;	
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,12 @@ public class MountainFileDAO {
 
 	public MountainFileDAO() {
 		try {
-			String dbURL = "jdbc:mysql://localhost:3306/bbs";
+			String ipStr;
+			InetAddress ip = InetAddress.getLocalHost();
+			if(ip.toString().equals("192.168.219.90")) ipStr="localhost";
+			else ipStr = "122.42.239.89";
+			
+			String dbURL = "jdbc:mysql://" +ipStr+ ":3306/BBS";
 			String dbID = "root";
 			String dbPassword = "root";
 
