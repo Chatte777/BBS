@@ -9,7 +9,9 @@
 <%@ page import="java.io.File"%>
 <%@ page import="mountainFile.MountainFile"%>
 <%@ page import="mountainFile.MountainFileDAO"%>
- 
+<%@ page import="mountainReReply.MountainReReply"%>
+<%@ page import="mountainReReply.MountainReReplyDAO"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -101,8 +103,12 @@
 					<%
 						MountainReplyDAO mountainReplyDAO = new MountainReplyDAO();
 						ArrayList<MountainReply> list = mountainReplyDAO.getList(mountainNo);
+						
+						MountainReReplyDAO mountainReReplyDAO = new MountainReReplyDAO();
+						
 
 						for (int i = 0; i < list.size(); i++) {
+							
 					%>
 					<tr>
 						<td align="center"><%=list.get(i).getReplyNo()%></td>
@@ -111,10 +117,8 @@
 						<td align="center" style="width: 5%;">
 							<%
 								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-							%>
-							<a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color:#cccccc"/>
-							<a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"/> <span aria-hidden="true">&times;</span>
-						 <%
+							%> <a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> 
+							<%
  	}
  %>
 						</td>
@@ -123,8 +127,24 @@
 						+ "시" + list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>
 					</tr>
 					<%
-						}
+					ArrayList<MountainReReply> listReReply = mountainReReplyDAO.getInnerList(mountainNo, list.get(i).getReplyNo());
+					
+					for (int j = 0; j < listReReply.size(); j++) {
+						
+						%>
+					<tr>
+						<td align="center"><%=listReReply.get(j).getReReplyNo()%></td>
+						<td align="left" style="word-break: break-all;"><%=listReReply.get(j).getReReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+							.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
+						<td align="center" style="width: 5%;">
+							<%
+									if (userID != null && userID.equals(list.get(j).getReplyMakeUser())) {
+								%> <a onclick="myFunction('<%=list.get(j).getReplyContent()%>', '<%=list.get(j).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(j).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> <%
+	 	}
+						%></td></tr><%
+						}}
 					%>
+						
 				</tbody>
 			</table>
 		</div>
@@ -148,9 +168,7 @@
 			}
 		%>
 		<a href="mountainWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
-
 	</div>
-
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
