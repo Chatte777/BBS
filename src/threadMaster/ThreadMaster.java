@@ -11,6 +11,7 @@ public class ThreadMaster {
 	private int threadLikeCnt;
 	private int threadDislikeCnt;
 	private int threadDeleteYn;
+	private int threadAuthorize;
 	
 	public int getThreadNo() {
 		return threadNo;
@@ -71,6 +72,12 @@ public class ThreadMaster {
 	}
 	public void setThreadDeleteYn(int threadDeleteYn) {
 		this.threadDeleteYn = threadDeleteYn;
+	}
+	public int getThreadAuthorize() {
+		return threadAuthorize;
+	}
+	public void setThreadAuthorize(int threadAuthorize) {
+		this.threadAuthorize = threadAuthorize;
 	}
 	
 	

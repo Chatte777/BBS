@@ -58,7 +58,8 @@
 			} else {
 				ThreadMasterDAO threadMasterDAO = new ThreadMasterDAO();
 				int result = threadMasterDAO.write(multipartRequest.getParameterValues("threadTitle")[0], userID,
-						multipartRequest.getParameterValues("threadContent")[0]);
+						multipartRequest.getParameterValues("threadContent")[0],
+						Integer.parseInt(multipartRequest.getParameterValues("threadAuthorize")[0]));
 
 				if (result == -1) {
 					PrintWriter script = response.getWriter();

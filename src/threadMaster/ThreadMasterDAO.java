@@ -62,8 +62,8 @@ public class ThreadMasterDAO {
 		return -1; //Database error
 	}
 	
-	public int write(String threadTitle, String threadMakeUser, String threadContent){
-		String SQL = "INSERT INTO thread_master VALUES(?,?,?,?,?,?,?,?,?,?)";
+	public int write(String threadTitle, String threadMakeUser, String threadContent, int threadAuthorize){
+		String SQL = "INSERT INTO thread_master VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		int tmpNextNo = getNext();
 		
 		try{
@@ -78,6 +78,7 @@ public class ThreadMasterDAO {
 			pstmt.setInt(8, 1);
 			pstmt.setInt(9, 1);
 			pstmt.setInt(10, 1);
+			pstmt.setInt(11, threadAuthorize);
 
 			pstmt.executeUpdate();
 			
@@ -88,13 +89,19 @@ public class ThreadMasterDAO {
 		return -1; //Database error
 	}
 	
-	public ArrayList<ThreadMaster> getList(int pageNumber){
-		String SQL = "SELECT * from thread_master WHERE thread_no < ? AND thread_delete_yn = 1 ORDER BY thread_no DESC LIMIT 10";
+	
+	public ArrayList<ThreadMaster> getList(int pageNumber, String userId){
+		String SQL = "SELECT * from thread_master "
+				+ "WHERE thread_no < ? "
+				+ "AND thread_delete_yn=1 "
+				+ "AND (thread_authorize = 1 OR (thread_authorize=2 and thread_make_user=?))"
+				+ "ORDER BY thread_no DESC LIMIT 10";
 		ArrayList<ThreadMaster> list = new ArrayList<ThreadMaster>();
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext()-(pageNumber-1)*10);
+			pstmt.setString(2, userId);
 			
 			rs = pstmt.executeQuery();
 			
@@ -110,6 +117,7 @@ public class ThreadMasterDAO {
 				threadMaster.setThreadLikeCnt(rs.getInt(8));
 				threadMaster.setThreadDislikeCnt(rs.getInt(9));
 				threadMaster.setThreadDeleteYn(rs.getInt(10));
+				threadMaster.setThreadAuthorize(rs.getInt(11));
 				list.add(threadMaster);
 			}
 		} catch(Exception e){
@@ -157,6 +165,7 @@ public class ThreadMasterDAO {
 				threadMaster.setThreadLikeCnt(rs.getInt(8));
 				threadMaster.setThreadDislikeCnt(rs.getInt(9));
 				threadMaster.setThreadDeleteYn(rs.getInt(10));
+				threadMaster.setThreadAuthorize(rs.getInt(11));
 				
 				return threadMaster;
 			}

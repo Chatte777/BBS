@@ -26,7 +26,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>썸네일</td>
+							<td colspan="2">썸네일</td>
 						</tr>
 </body>
 </html>
