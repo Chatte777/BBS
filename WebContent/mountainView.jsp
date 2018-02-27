@@ -111,13 +111,14 @@
 							
 					%>
 					<tr>
-						<td align="center"><%=list.get(i).getReplyNo()%></td>
+						<td align="center">
+						<a onclick="reReplyClick('<%=list.get(i).getReplyNo()%>')" style="text-decoration:none; color:#000000;"><%=list.get(i).getReplyNo()%></a></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<td align="center" style="width: 5%;">
 							<%
 								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-							%> <a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> 
+							%> <a onclick="modifyClick('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> 
 							<%
  	}
  %>
@@ -132,16 +133,21 @@
 					for (int j = 0; j < listReReply.size(); j++) {
 						
 						%>
-					<tr>
-						<td align="center"><%=listReReply.get(j).getReReplyNo()%></td>
+					<tr style="height:1px; font-size: 0.875em; background-color:#FEFEF2; margin: 1em;">
+					<td align="center"><span class="glyphicon glyphicon-menu-right" style="color: #bbbbbb;">&nbsp;</span></td>
+						
 						<td align="left" style="word-break: break-all;"><%=listReReply.get(j).getReReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 							.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<td align="center" style="width: 5%;">
 							<%
 									if (userID != null && userID.equals(list.get(j).getReplyMakeUser())) {
-								%> <a onclick="myFunction('<%=list.get(j).getReplyContent()%>', '<%=list.get(j).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(j).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> <%
+								%> <a onclick="modifyClick'<%=list.get(j).getReplyContent()%>', '<%=list.get(j).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(j).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> <%
 	 	}
-						%></td></tr><%
+						%></td>
+						<td><%=list.get(j).getReplyMakeUser()%></td>
+						<td><%=list.get(i).getReplyMakeDt().substring(0, 11) + list.get(i).getReplyMakeDt().substring(11, 13)
+						+ "시" + list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>
+						</tr><%
 						}}
 					%>
 						
@@ -153,7 +159,7 @@
 			<form name="replyForm">
 				<tbody>
 					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
-					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
+					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" id="replyActionBtn" value="댓글작성"></td>
 					<input type="hidden" name="mountainNo" value="<%=mountainMaster.getMountainNo()%>">
 				</tbody>
 			</form>
@@ -177,11 +183,17 @@
 	var updateFlag=1;
 	var _replyNo=0;
 	
-function myFunction(replyContent, replyNo) {
-	updateFlag=2;
-	_replyNo=replyNo;
-	document.getElementById("replyContent").value = replyContent;
-}
+	function modifyClick(replyContent, replyNo) {
+		updateFlag=2;
+		_replyNo=replyNo;
+		document.getElementById("replyContent").value = replyContent;
+	}
+	
+	function reReplyClick(replyNo) {
+		updateFlag=3;
+		_replyNo=replyNo;
+		document.getElementById("replyContent").value = replyNo+"번 리플에 대한 대댓글을 작성하세요.";
+	}
 
 function replySubmit(){
 	if(updateFlag==1){
