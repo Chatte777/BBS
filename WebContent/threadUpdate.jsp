@@ -68,9 +68,10 @@
 						<tr>
 							<tr>
 								<td><input type="text" class="form-control" placeholder="글 제목" name="threadTitle" maxlength="50" value="<%=threadMaster.getThreadTitle()%>"></td>
+								<td><select class="form-control" name="threadAuthorize"><option value="1" <%if (threadMaster.getThreadAuthorize()==1){ %>selected <%}%>>전체공개</option><option value="2"  <%if (threadMaster.getThreadAuthorize()==2){ %>selected <%}%>>나만보기</option></select></td>
 							</tr>
 							<tr>
-								<td><textarea type="text" class="form-control" placeholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"><%=threadMaster.getThreadContent()%></textarea></td>
+								<td colspan="2"><textarea type="text" class="form-control" placeholder="글 내용" name="threadContent" maxlength="2048" style="height: 350px;"><%=threadMaster.getThreadContent()%></textarea></td>
 							</tr>
 							<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>

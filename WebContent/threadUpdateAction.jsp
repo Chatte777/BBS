@@ -26,12 +26,13 @@
 		String threadTitle = null;
 		String threadContent = null;
 
-		String directory = "images/uploadFile/threadFile";
+		String tmpDirDesktop = "E:/Dropbox/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
+		String tmpDirLaptop = "C:/Workspace/Eclipse/BBS/WebContent/images/uploadFile/mountainFile/";
+		String directory = tmpDirDesktop;
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 
-		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding,
-				new DefaultFileRenamePolicy());
+		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxSize, encoding, new DefaultFileRenamePolicy());
 
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
@@ -77,7 +78,8 @@
 				int result = threadMasterDAO.update(
 						Integer.parseInt(multipartRequest.getParameterValues("threadNo")[0]),
 						multipartRequest.getParameterValues("threadTitle")[0],
-						multipartRequest.getParameterValues("threadContent")[0]);
+						multipartRequest.getParameterValues("threadContent")[0],
+						Integer.parseInt(multipartRequest.getParameterValues("threadAuthorize")[0]));
 
 				if (result == -1) {
 					PrintWriter script = response.getWriter();

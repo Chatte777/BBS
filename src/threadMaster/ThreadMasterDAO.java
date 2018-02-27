@@ -175,13 +175,14 @@ public class ThreadMasterDAO {
 		return null; 
 	}
 	
-	public int update(int threadNo, String threadTitle, String threadContent){
-		String SQL = "UPDATE thread_master SET thread_title=?, thread_content=? WHERE thread_no=?";
+	public int update(int threadNo, String threadTitle, String threadContent, int threadAuthorize){
+		String SQL = "UPDATE thread_master SET thread_title=?, thread_content=?, thread_authorize=? WHERE thread_no=?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, threadTitle);
 			pstmt.setString(2, threadContent);
-			pstmt.setInt(3, threadNo);
+			pstmt.setInt(3, threadAuthorize);
+			pstmt.setInt(4, threadNo);
 			
 			pstmt.executeUpdate();
 			return threadNo;

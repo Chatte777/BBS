@@ -56,8 +56,15 @@
 				<tbody>
 					<tr>
 						<td style="width: 20%;">글제목</td>
-						<td colspan="3"><%=threadMaster.getThreadTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
-					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
+						<td colspan="3">
+						<%
+							if(threadMaster.getThreadAuthorize()==2){
+						%><span class="glyphicon glyphicon-lock" style="color: #bbbbbb;">&nbsp;</span><%
+								}
+								%>
+						<%=threadMaster.getThreadTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
+					.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%>
+					</td>
 					</tr>
 					<tr>
 						<td>작성자</td>

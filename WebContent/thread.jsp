@@ -71,7 +71,14 @@ a, a:hover {
 							<%if(replyCnt!=0){%><%=replyCnt%>
 							<%}%>
 						</td>
-						<td><a href="threadView.jsp?threadNo=<%= list.get(i).getThreadNo() %>"><%= list.get(i).getThreadTitle() %></a></td>
+						<td>
+						<%
+							if(list.get(i).getThreadAuthorize()==2){
+						%><span class="glyphicon glyphicon-lock" style="color: #bbbbbb;">&nbsp;</span><%
+								}
+								%>
+						<a href="threadView.jsp?threadNo=<%= list.get(i).getThreadNo() %>"><%= list.get(i).getThreadTitle() %></a>
+						</td>
 						<td><%= list.get(i).getThreadMakeUser() %></td>
 						<td><%= list.get(i).getThreadMakeDt().substring(0,11)+list.get(i).getThreadMakeDt().substring(11,13)+"시"+list.get(i).getThreadMakeDt().substring(14,16)+"분" %></td>
 					</tr>
