@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
