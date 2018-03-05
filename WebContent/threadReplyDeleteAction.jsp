@@ -29,22 +29,22 @@
 				script.println("</script>");
 			}
 		
-			int replyID = 0;
-			if(request.getParameter("replyID") != null){
-				replyID = Integer.parseInt(request.getParameter("replyID"));
+			int replyNo = 0;
+			if(request.getParameter("replyNo") != null){
+				replyNo = Integer.parseInt(request.getParameter("replyNo"));
 			}
 		
-			if(replyID == 0){
+			if(replyNo == 0){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('유효하지 않은 글입니다.')");
-				script.println("location.href = 'bbs.jsp'");
+				script.println("location.href = 'thread.jsp'");
 				script.println("</script>"); 
 			}
 
 			Reply reply = new Reply();
 			ReplyDAO replyDAO = new ReplyDAO();
-			reply = replyDAO.getReply(Integer.parseInt(request.getParameter("bbsID")), replyID);
+			reply = replyDAO.getReply(Integer.parseInt(request.getParameter("threadNo")), replyNo);
 			if(!userID.equals(reply.getUserID())){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
@@ -53,7 +53,7 @@
 				script.println("</script>"); 
 			} else {
 
-					int result = replyDAO.delete(Integer.parseInt(request.getParameter("bbsID")), replyID);
+					int result = replyDAO.delete(Integer.parseInt(request.getParameter("threadNo")), replyNo);
 					
 					if(result == -1){
 						PrintWriter script = response.getWriter();
@@ -66,7 +66,7 @@
 					{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.href='view.jsp?bbsID=" + request.getParameter("bbsID") + "'");
+						script.println("location.href='threadView.jsp?threadNo=" + request.getParameter("threadNo") + "'");
 						script.println("</script>");
 					}
 			

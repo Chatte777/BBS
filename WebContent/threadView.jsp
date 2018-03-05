@@ -134,17 +134,17 @@
 				</tbody>
 			</table>
 		</div>
-
-		<table class="table table-condensed">
-			<form name="replyForm">
-				<tbody>
-					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
-					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
-					<input type="hidden" name="threadNo" value="<%=threadMaster.getThreadNo()%>">
-				</tbody>
-			</form>
-		</table>
-
+		<form name="replyForm">
+				<table class="table table-condensed">
+					<tbody>
+						<tr>
+							<td style="width: 90%;"><textarea type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></textarea></td>
+							<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
+						</tr>		
+					</tbody>
+				</table>
+			<input type="hidden" name="threadNo" value="<%=threadMaster.getThreadNo()%>">
+		</form>
 		<a href="thread.jsp" class="btn btn-primary">목록</a>
 		<%
 			if (userID != null && userID.equals(threadMaster.getThreadMakeUser())) {

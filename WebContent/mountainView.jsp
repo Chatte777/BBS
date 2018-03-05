@@ -103,23 +103,19 @@
 					<%
 						MountainReplyDAO mountainReplyDAO = new MountainReplyDAO();
 						ArrayList<MountainReply> list = mountainReplyDAO.getList(mountainNo);
-						
+
 						MountainReReplyDAO mountainReReplyDAO = new MountainReReplyDAO();
-						
 
 						for (int i = 0; i < list.size(); i++) {
-							
 					%>
 					<tr>
-						<td align="center">
-						<a onclick="reReplyClick('<%=list.get(i).getReplyNo()%>')" style="text-decoration:none; color:#000000;"><%=list.get(i).getReplyNo()%></a></td>
+						<td align="center"><a onclick="reReplyClick('<%=list.get(i).getReplyNo()%>')" style="text-decoration: none; color: #000000;"><%=list.get(i).getReplyNo()%></a></td>
 						<td align="left" style="word-break: break-all;"><%=list.get(i).getReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<td align="center" style="width: 5%;">
 							<%
 								if (userID != null && userID.equals(list.get(i).getReplyMakeUser())) {
-							%> <a onclick="modifyClick('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> 
-							<%
+							%> <a onclick="modifyClick('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(i).getReplyNo()%>" type="button" class="close" aria-label="close"></a> <span aria-hidden="true">&times;</span> <%
  	}
  %>
 						</td>
@@ -128,43 +124,48 @@
 						+ "시" + list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>
 					</tr>
 					<%
-					ArrayList<MountainReReply> listReReply = mountainReReplyDAO.getInnerList(mountainNo, list.get(i).getReplyNo());
-					
-					for (int j = 0; j < listReReply.size(); j++) {
-						
-						%>
-					<tr style="height:1px; font-size: 0.875em; background-color:#FEFEF2; margin: 1em;">
-					<td align="center"><span class="glyphicon glyphicon-menu-right" style="color: #bbbbbb;">&nbsp;</span></td>
-						
+						ArrayList<MountainReReply> listReReply = mountainReReplyDAO.getInnerList(mountainNo,
+									list.get(i).getReplyNo());
+
+							for (int j = 0; j < listReReply.size(); j++) {
+					%>
+					<tr style="height: 1px; font-size: 0.875em; background-color: #FEFEF2; margin: 1em;">
+						<td align="center"><span class="glyphicon glyphicon-menu-right" style="color: #bbbbbb;">&nbsp;</span></td>
+
 						<td align="left" style="word-break: break-all;"><%=listReReply.get(j).getReReplyContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 							.replaceAll(">", "&gt;").replaceAll("\n", "<br>")%></td>
 						<td align="center" style="width: 5%;">
 							<%
-									if (userID != null && userID.equals(list.get(j).getReplyMakeUser())) {
-								%> <a onclick="modifyClick'<%=list.get(j).getReplyContent()%>', '<%=list.get(j).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(j).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> <%
-	 	}
-						%></td>
+								if (userID != null && userID.equals(list.get(j).getReplyMakeUser())) {
+							%> <a onclick="modifyClick'<%=list.get(j).getReplyContent()%>', '<%=list.get(j).getReplyNo()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc" /> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="mountainReplyDeleteAction.jsp?mountainNo=<%=mountainNo%>&replyNo=<%=list.get(j).getReplyNo()%>" type="button" class="close" aria-label="close" /> <span aria-hidden="true">&times;</span> <%
+ 	}
+ %>
+						</td>
 						<td><%=list.get(j).getReplyMakeUser()%></td>
-						<td><%=list.get(i).getReplyMakeDt().substring(0, 11) + list.get(i).getReplyMakeDt().substring(11, 13)
-						+ "시" + list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>
-						</tr><%
-						}}
+						<td><%=list.get(i).getReplyMakeDt().substring(0, 11)
+							+ list.get(i).getReplyMakeDt().substring(11, 13) + "시"
+							+ list.get(i).getReplyMakeDt().substring(14, 16) + "분"%></td>
+					</tr>
+					<%
+						}
+						}
 					%>
-						
+
 				</tbody>
 			</table>
 		</div>
 
-		<table class="table table-condensed">
-			<form name="replyForm">
+		<form name="replyForm">
+			<table class="table table-condensed">
 				<tbody>
-					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
-					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" id="replyActionBtn" value="댓글작성"></td>
-					<input type="hidden" name="mountainNo" value="<%=mountainMaster.getMountainNo()%>">
+					<tr>
+						<td style="width: 90%;"><textarea class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></textarea></td>
+						<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
+					</tr>
 				</tbody>
-			</form>
-		</table>
-
+			</table>
+			<input type="hidden" name="threadNo" value="<%=mountainMaster.getMountainNo()%>">
+		</form>
 		<a href="mountain.jsp" class="btn btn-primary">목록</a>
 		<%
 			if (userID != null && userID.equals(mountainMaster.getMountainMakeUser())) {

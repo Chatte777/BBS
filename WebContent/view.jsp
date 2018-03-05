@@ -124,15 +124,17 @@
 		</div>
 
 
-		<table class="table table-condensed">
-			<form name="replyForm">
+		<form name="replyForm">
+			<table class="table table-condensed">
 				<tbody>
-					<td style="width: 90%;"><input type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></td>
-					<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
-					<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
+					<tr>
+						<td style="width: 90%;"><textarea class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></textarea></td>
+						<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
+					</tr>
 				</tbody>
-			</form>
-		</table>
+			</table>
+			<input type="hidden" name="bbsID" value="<%=bbs.getBbsID()%>">
+		</form>
 
 
 
@@ -168,7 +170,8 @@
 				document.replyForm.method = "post";
 				document.replyForm.submit();
 			} else if (updateFlag == 2) {
-				document.replyForm.action = "replyUpdateAction.jsp?replyID=" + _replyId;
+				document.replyForm.action = "replyUpdateAction.jsp?replyID="
+						+ _replyId;
 				document.replyForm.method = "post";
 				document.replyForm.submit();
 			}
