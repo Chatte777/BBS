@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import = "bbs.BbsDAO" %>
-<%@ page import = "bbs.Bbs" %>
-<%@ page import = "reply.Reply" %>
-<%@ page import = "reply.ReplyDAO" %>
+<%@ page import = "threadMaster.ThreadMasterDAO" %>
+<%@ page import = "threadMaster.ThreadMaster" %>
+<%@ page import = "threadReply.ThreadReply" %>
+<%@ page import = "threadReply.ThreadReplyDAO" %>
 <%@ page import = "java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -42,10 +42,10 @@
 				script.println("</script>"); 
 			}
 
-			Reply reply = new Reply();
-			ReplyDAO replyDAO = new ReplyDAO();
-			reply = replyDAO.getReply(Integer.parseInt(request.getParameter("threadNo")), replyNo);
-			if(!userID.equals(reply.getUserID())){
+			ThreadReply threadReply = new ThreadReply();
+			ThreadReplyDAO threadReplyDAO = new ThreadReplyDAO();
+			threadReply = threadReplyDAO.getReply(Integer.parseInt(request.getParameter("threadNo")), replyNo);
+			if(!userID.equals(threadReply.getReplyMakeUser())){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('권한이 없습니다.')");
@@ -53,7 +53,7 @@
 				script.println("</script>"); 
 			} else {
 
-					int result = replyDAO.delete(Integer.parseInt(request.getParameter("threadNo")), replyNo);
+					int result = threadReplyDAO.delete(Integer.parseInt(request.getParameter("threadNo")), replyNo);
 					
 					if(result == -1){
 						PrintWriter script = response.getWriter();
@@ -69,13 +69,7 @@
 						script.println("location.href='threadView.jsp?threadNo=" + request.getParameter("threadNo") + "'");
 						script.println("</script>");
 					}
-			
-		
-		
 		}
-	
-
-			
 	%>
 </body>
 </html>
