@@ -57,7 +57,7 @@
 			} else {
 				MountainMasterDAO mountainMasterDAO = new MountainMasterDAO();
 				int result = mountainMasterDAO.write(multipartRequest.getParameterValues("mountainTitle")[0], userID,
-						multipartRequest.getParameterValues("mountainContent")[0]);
+						multipartRequest.getParameterValues("mountainContent")[0], Integer.parseInt(multipartRequest.getParameterValues("mountainAuthorize")[0]));
 
 				if (result == -1) {
 					PrintWriter script = response.getWriter();

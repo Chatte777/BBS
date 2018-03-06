@@ -42,7 +42,7 @@
 						}
 				
 					BoardDAO boardDAO = new BoardDAO(boardName);
-					ArrayList<BoardVO> list = boardDAO.getList(pageNumber, userId);
+					ArrayList<BoardVO> list = null; //boardDAO.getList(pageNumber, userId);
 					
 					for(int i=0; i<list.size(); i++){
 						int replyCnt = boardDAO.getReplyCnt(list.get(i).getBoardNo());

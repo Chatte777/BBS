@@ -12,7 +12,7 @@ public class BbsDAO {
 	private Connection conn;
 	private ResultSet rs;
 	
-	public BbsDAO() {
+	public BbsDAO() { 
 		try {
 			String ipStr;
 			InetAddress ip = InetAddress.getLocalHost();

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.0%Foundation-1.0"/>
+	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/catalina.jar"/>
+	<classpathentry exported="true" kind="lib" path=".classpath"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
