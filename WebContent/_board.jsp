@@ -1,20 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="board.BoardDAO"%>
 <%@ page import="board.BoardVO"%>
 <%@ page import="java.util.ArrayList"%>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
 <div class="container">
 	<div class="row">
 		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 			<thead>
 				<tr>
-					<th style="background-color: #eeeeee; text-align: center;">´ñ±Û</th>
-					<th style="background-color: #eeeeee; text-align: center;">Á¦¸ñ</th>
-					<th style="background-color: #eeeeee; text-align: center;">ÀÛ¼ºÀÚ</th>
-					<th style="background-color: #eeeeee; text-align: center;">ÀÛ¼ºÀÏ</th>
+					<th style="background-color: #eeeeee; text-align: center;">ëŒ“ê¸€</th>
+					<th style="background-color: #eeeeee; text-align: center;">ì œëª©</th>
+					<th style="background-color: #eeeeee; text-align: center;">ì‘ì„±ì</th>
+					<th style="background-color: #eeeeee; text-align: center;">ì‘ì„±ì¼</th>
 				</tr>
 			</thead>
 
@@ -53,7 +62,7 @@
 					</td>
 					<td><a href="<%=boardName%>View.jsp?<%=boardName%>No=<%= list.get(i).getBoardNo() %>"><%= list.get(i).getBoardTitle() %></a></td>
 					<td><%= list.get(i).getBoardMakeUser() %></td>
-					<td><%= list.get(i).getBoardMakeDt().substring(0,11)+list.get(i).getBoardMakeDt().substring(11,13)+"½Ã"+list.get(i).getBoardMakeDt().substring(14,16)+"ºĞ" %></td>
+					<td><%= list.get(i).getBoardMakeDt().substring(0,11)+list.get(i).getBoardMakeDt().substring(11,13)+"ì‹œ"+list.get(i).getBoardMakeDt().substring(14,16)+"ë¶„" %></td>
 				</tr>
 				<%
 					}				
@@ -64,15 +73,18 @@
 		<%
 				if(pageNumber!= 1){
 			%>
-		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">ÀÌÀü</a>
+		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">ì´ì „</a>
 		<%
 				} if(boardDAO.nextPage(pageNumber+1)) {
 			%>
-		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">´ÙÀ½</a>
+		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">ë‹¤ìŒ</a>
 		<%
 				}
 			%>
 
-		<a href="<%=boardName%>Write.jsp?boardName=<%=boardName%>" class="btn btn-primary pull-right">±Û¾²±â</a>
+		<a href="<%=boardName%>Write.jsp?boardName=<%=boardName%>" class="btn btn-primary pull-right">ê¸€ì“°ê¸°</a>
 	</div>
 </div>
+
+</body>
+</html>
