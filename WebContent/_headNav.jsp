@@ -42,11 +42,11 @@
 		<ul class="nav navbar-nav">
 			<li><a href="main.jsp">메인</a></li>
 			<li><a href="bbs.jsp">공지 및 건의</a></li>
-			<li><a href="mountain.jsp">산악일기</a></li>
+			<li><a href="mountain.jsp?boardName=mountain">산악일기</a></li>
 			<%
 				if (userID != null && (userID.equals("slop1434") || userID.equals("chatte777") || userID.equals("test"))) {
 			%>
-			<li><a href="thread.jsp">대화의 숲</a></li>
+			<li><a href="thread.jsp?boardName=thread">대화의 숲</a></li>
 			<%
 				}
 			%>

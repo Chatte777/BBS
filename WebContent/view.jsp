@@ -108,7 +108,7 @@
 						<td align="center" style="width: 5%;">
 							<%
 								if (userID != null && userID.equals(list.get(i).getUserID())) {
-							%> <a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyID()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc"></a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="deleteAction.jsp?bbsId=<%=bbsID%>&replyNo=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a> <%
+							%> <a onclick="myFunction('<%=list.get(i).getReplyContent()%>', '<%=list.get(i).getReplyID()%>')" type="button" class="glyphicon glyphicon-pencil" style="color: #cccccc"></a> <a onclick="return confirm('정말로 삭제하시겠습니까?')" a href="replyDeleteAction.jsp?bbsId=<%=bbsID%>&replyId=<%=list.get(i).getReplyID()%>" type="button" class="close" aria-label="close"> <span aria-hidden="true">&times;</span></a> <%
  	}
  %>
 						</td>

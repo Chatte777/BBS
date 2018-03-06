@@ -81,16 +81,16 @@
 			<%
 				if(pageNumber!= 1){
 			%>
-				<a href="mountain.jsp?pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">이전</a>
+				<a href="mountain.jsp?boardName=mountain&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">이전</a>
 			<%
 				} if(mountainMasterDAO.nextPage(pageNumber+1)) {
 			%>
-				<a href="mountain.jsp?pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">다음</a>
+				<a href="mountain.jsp?boardName=mountain&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">다음</a>
 			<%
 				}
 			%>
 			
-			<a href="mountainWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="mountainWrite.jsp?boardName=mountain" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 	

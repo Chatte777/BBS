@@ -91,16 +91,16 @@ a, a:hover {
 			<%
 				if(pageNumber!= 1){
 			%>
-			<a href="thread.jsp?pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">이전</a>
+			<a href="thread.jsp?boardName=thread&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">이전</a>
 			<%
 				} if(threadMasterDAO.nextPage(pageNumber+1)) {
 			%>
-			<a href="thread.jsp?pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">다음</a>
+			<a href="thread.jsp?boardName=thread&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">다음</a>
 			<%
 				}
 			%>
 
-			<a href="threadWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="threadWrite.jsp?boardName=thread" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 	</div>
 

@@ -65,8 +65,8 @@ public class MountainMasterDAO {
 		return -1; // Database error
 	}
 
-	public int write(String mountainTitle, String mountainMakeUser, String mountainContent) {
-		String SQL = "INSERT INTO mountain_master VALUES(?,?,?,?,?,?,?,?,?,?)";
+	public int write(String mountainTitle, String mountainMakeUser, String mountainContent, int mountainAuthorize) {
+		String SQL = "INSERT INTO mountain_master VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		int tmpNextNo = getNext();
 
 		try {
@@ -81,6 +81,7 @@ public class MountainMasterDAO {
 			pstmt.setInt(8, 1);
 			pstmt.setInt(9, 1);
 			pstmt.setInt(10, 1);
+			pstmt.setInt(11, mountainAuthorize);
 
 			pstmt.executeUpdate();
 
@@ -113,6 +114,7 @@ public class MountainMasterDAO {
 				mountainMaster.setMountainLikeCnt(rs.getInt(8));
 				mountainMaster.setMountainDislikeCnt(rs.getInt(9));
 				mountainMaster.setMountainDeleteYn(rs.getInt(10));
+				mountainMaster.setMountainAuthorize(rs.getInt(11));
 				list.add(mountainMaster);
 			}
 		} catch (Exception e) {
@@ -160,6 +162,7 @@ public class MountainMasterDAO {
 				mountainMaster.setMountainLikeCnt(rs.getInt(8));
 				mountainMaster.setMountainDislikeCnt(rs.getInt(9));
 				mountainMaster.setMountainDeleteYn(rs.getInt(10));
+				mountainMaster.setMountainAuthorize(rs.getInt(11));
 
 				return mountainMaster;
 			}

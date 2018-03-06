@@ -11,6 +11,7 @@ public class MountainMaster {
 	private int mountainLikeCnt;
 	private int mountainDislikeCnt;
 	private int mountainDeleteYn;
+	private int mountainAuthorize;
 	
 	public int getMountainNo() {
 		return mountainNo;
@@ -72,4 +73,11 @@ public class MountainMaster {
 	public void setMountainDeleteYn(int mountainDeleteYn) {
 		this.mountainDeleteYn = mountainDeleteYn;
 	}
+	public int getMountainAuthorize() {
+		return mountainAuthorize;
+	}
+	public void setMountainAuthorize(int mountainAuthorize) {
+		this.mountainAuthorize = mountainAuthorize;
+	}
+	
 }

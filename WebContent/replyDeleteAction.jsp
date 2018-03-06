@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import = "threadMaster.ThreadMasterDAO" %>
-<%@ page import = "threadMaster.ThreadMaster" %>
-<%@ page import = "threadReply.ThreadReply" %>
-<%@ page import = "threadReply.ThreadReplyDAO" %>
+<%@ page import = "bbs.BbsDAO" %>
+<%@ page import = "bbs.Bbs" %>
+<%@ page import = "reply.Reply" %>
+<%@ page import = "reply.ReplyDAO" %>
 <%@ page import = "java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -29,23 +29,23 @@
 				script.println("</script>");
 			}
 		
-			int replyNo = 0;
-			if(request.getParameter("replyNo") != null){
-				replyNo = Integer.parseInt(request.getParameter("replyNo"));
+			int replyId = 0;
+			if(request.getParameter("replyId") != null){
+				replyId = Integer.parseInt(request.getParameter("replyId"));
 			}
 		
-			if(replyNo == 0){
+			if(replyId == 0){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('유효하지 않은 글입니다.')");
-				script.println("location.href = 'thread.jsp'");
+				script.println("location.href = 'thread.jsp?boardName=thread'");
 				script.println("</script>"); 
 			}
 
-			ThreadReply threadReply = new ThreadReply();
-			ThreadReplyDAO threadReplyDAO = new ThreadReplyDAO();
-			threadReply = threadReplyDAO.getReply(Integer.parseInt(request.getParameter("threadNo")), replyNo);
-			if(!userID.equals(threadReply.getReplyMakeUser())){
+			Reply reply = new Reply();
+			ReplyDAO replyDAO = new ReplyDAO();
+			reply = replyDAO.getReply(Integer.parseInt(request.getParameter("bbsId")), replyId);
+			if(!userID.equals(reply.getUserID())){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('권한이 없습니다.')");
@@ -53,7 +53,7 @@
 				script.println("</script>"); 
 			} else {
 
-					int result = threadReplyDAO.delete(Integer.parseInt(request.getParameter("threadNo")), replyNo);
+					int result = replyDAO.delete(Integer.parseInt(request.getParameter("bbsId")), replyId);
 					
 					if(result == -1){
 						PrintWriter script = response.getWriter();
@@ -66,7 +66,7 @@
 					{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.href='thread.jsp?threadNo=" + request.getParameter("threadNo") + "'");
+						script.println("location.href='view.jsp?bbsID=" + request.getParameter("bbsId") + "'");
 						script.println("</script>");
 					}
 		}

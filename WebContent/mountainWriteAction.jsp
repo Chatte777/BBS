@@ -106,7 +106,7 @@
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
 						script.println("alert('업로드 되었습니다..')");
-						script.println("location.href='mountain.jsp'");
+						script.println("location.href='mountain.jsp?boardName=mountain'");
 						script.println("</script>");
 
 					}

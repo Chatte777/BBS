@@ -37,7 +37,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href = 'mountain.jsp'");
+			script.println("location.href = 'mountain.jsp?boardName=mountain'");
 			script.println("</script>");
 		}
 		MountainMaster mountainMaster = new MountainMasterDAO().getMountainMaster(mountainNo);
@@ -166,7 +166,7 @@
 			</table>
 			<input type="hidden" name="threadNo" value="<%=mountainMaster.getMountainNo()%>">
 		</form>
-		<a href="mountain.jsp" class="btn btn-primary">목록</a>
+		<a href="mountain.jsp?boardName=mountain" class="btn btn-primary">목록</a>
 		<%
 			if (userID != null && userID.equals(mountainMaster.getMountainMakeUser())) {
 		%>
@@ -174,7 +174,7 @@
 		<%
 			}
 		%>
-		<a href="mountainWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+		<a href="mountainWrite.jsp?boardName=mountain" class="btn btn-primary pull-right">글쓰기</a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
