@@ -11,7 +11,7 @@ public class Bbs {
 	
 	
 	public int getBbsID() {
-		return bbsID;
+		return bbsID; 
 	}
 	public void setBbsID(int bbsID) {
 		this.bbsID = bbsID;

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -22,23 +22,23 @@ String authorize = boardName+"Authorize";
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">°Ô½ÃÆÇ ±Û¾²±â ¾ç½Ä</th>
+							<th colspan="2" style="background-color: #eeeeee; text-align: center;">ê²Œì‹œíŒ ê¸€ì“°ê¸° ì–‘ì‹</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<tr>
 						<tr>
-							<td><input type="text" class="form-control" placeholder="±Û Á¦¸ñ" name="<%=title%>" maxlength="50"></td>
-							<td><select class="form-control" name="<%=authorize%>"><option value="1" selected>ÀüÃ¼°ø°³</option><option value="2">³ª¸¸º¸±â</option></select></td>
+							<td><input type="text" class="form-control" placeholder="ê¸€ ì œëª©" name="<%=title%>" maxlength="50"></td>
+							<td><select class="form-control" name="<%=authorize%>"><option value="1" selected>ì „ì²´ê³µê°œ</option><option value="2">ë‚˜ë§Œë³´ê¸°</option></select></td>
 						</tr>
 						<tr>
-							<td colspan="2"><textarea type="text" class="form-control" placeholder="±Û ³»¿ë" name="<%=content%>" maxlength="2048" style="height: 350px;"></textarea></td>
+							<td colspan="2"><textarea type="text" class="form-control" placeholder="ê¸€ ë‚´ìš©" name="<%=content%>" maxlength="2048" style="height: 350px;"></textarea></td>
 						</tr>
 						<jsp:include page="_fileUpload.jsp" flush="false"/>
 					</tbody>
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" value="ÀÛ¼º¿Ï·á">
+				<input type="submit" class="btn btn-primary pull-right" value="ì‘ì„±ì™„ë£Œ">
 			</form>
 		</div>
 	</div>

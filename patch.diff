@@ -1,0 +1,612 @@
+diff --git a/.classpath b/.classpath
+index 5e03151..4e0d2ea 100644
+--- a/.classpath
++++ b/.classpath
+@@ -1,9 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <classpath>
+ 	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+-	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/servlet-api.jar"/>
+-	<classpathentry kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/jsp-api.jar"/>
+-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
+-	<classpathentry kind="output" path="bin"/>
++	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.0%Foundation-1.0"/>
++	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/servlet-api.jar"/>
++	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/jsp-api.jar"/>
++	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/cos.jar"/>
++	<classpathentry exported="true" kind="lib" path="C:/WebApp/apache-tomcat-8.5.27/lib/catalina.jar"/>
++	<classpathentry exported="true" kind="lib" path=".classpath"/>
++	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
++	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+ </classpath>
+diff --git a/.settings/org.eclipse.jdt.core.prefs b/.settings/org.eclipse.jdt.core.prefs
+index 295926d..980b98c 100644
+--- a/.settings/org.eclipse.jdt.core.prefs
++++ b/.settings/org.eclipse.jdt.core.prefs
+@@ -1,7 +1,12 @@
+ eclipse.preferences.version=1
+ org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+-org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
+-org.eclipse.jdt.core.compiler.compliance=1.8
++org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
++org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.7
++org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
++org.eclipse.jdt.core.compiler.compliance=1.7
++org.eclipse.jdt.core.compiler.debug.lineNumber=generate
++org.eclipse.jdt.core.compiler.debug.localVariable=generate
++org.eclipse.jdt.core.compiler.debug.sourceFile=generate
+ org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+ org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+-org.eclipse.jdt.core.compiler.source=1.8
++org.eclipse.jdt.core.compiler.source=1.7
+diff --git a/WebContent/WEB-INF/_board.jsp b/WebContent/WEB-INF/_board.jsp
+deleted file mode 100644
+index 4c4ca44..0000000
+--- a/WebContent/WEB-INF/_board.jsp
++++ /dev/null
+@@ -1,78 +0,0 @@
+-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+-
+-<%@ page import="java.io.PrintWriter"%>
+-<%@ page import="board.BoardDAO"%>
+-<%@ page import="board.BoardVO"%>
+-<%@ page import="java.util.ArrayList"%>
+-
+-
+-<div class="container">
+-	<div class="row">
+-		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+-			<thead>
+-				<tr>
+-					<th style="background-color: #eeeeee; text-align: center;">¥Ò±€</th>
+-					<th style="background-color: #eeeeee; text-align: center;">¡¶∏Ò</th>
+-					<th style="background-color: #eeeeee; text-align: center;">¿€º∫¿⁄</th>
+-					<th style="background-color: #eeeeee; text-align: center;">¿€º∫¿œ</th>
+-				</tr>
+-			</thead>
+-
+-			<tbody>
+-				<%
+-					String boardName = request.getParameter("boardName");
+-				
+-					String userId = null;
+-					if(session.getAttribute("userID") != null){
+-						userId = (String)session.getAttribute("userID");
+-					}
+-				
+-					int pageNumber = 1;
+-						if(request.getParameter("pageNumber") != null){
+-							pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+-						}
+-				
+-					BoardDAO boardDAO = new BoardDAO(boardName);
+-					ArrayList<BoardVO> list = boardDAO.getList(pageNumber, userId);
+-					
+-					for(int i=0; i<list.size(); i++){
+-						int replyCnt = boardDAO.getReplyCnt(list.get(i).getBoardNo());
+-						int replyColorFlag = boardDAO.getReplyColor(list.get(i).getBoardNo());
+-				%>
+-				<tr>
+-					<td <%
+-							if(replyColorFlag==1){%> style="color: #873286;" <%}
+-							else if(replyColorFlag==2){%> style="color:#DE2A45;" <%}
+-							else if(replyColorFlag==3){%> style="color:#F5762C;" <%}
+-							else if(replyColorFlag==4){%> style="color:#10BF00;" <%}
+-							else if(replyColorFlag==5){%> style="color:#2865BF;" <%}
+-							else if(replyColorFlag==6){%> style="color:black;" <%}
+-						%>>
+-						<%if(replyCnt!=0){%><%=replyCnt%>
+-						<%}%>
+-					</td>
+-					<td><a href="<%=boardName%>View.jsp?<%=boardName%>No=<%= list.get(i).getBoardNo() %>"><%= list.get(i).getBoardTitle() %></a></td>
+-					<td><%= list.get(i).getBoardMakeUser() %></td>
+-					<td><%= list.get(i).getBoardMakeDt().substring(0,11)+list.get(i).getBoardMakeDt().substring(11,13)+"Ω√"+list.get(i).getBoardMakeDt().substring(14,16)+"∫–" %></td>
+-				</tr>
+-				<%
+-					}				
+-				%>
+-			</tbody>
+-		</table>
+-
+-		<%
+-				if(pageNumber!= 1){
+-			%>
+-		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">¿Ã¿¸</a>
+-		<%
+-				} if(boardDAO.nextPage(pageNumber+1)) {
+-			%>
+-		<a href="<%=boardName%>.jsp?boardName=<%=boardName%>&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">¥Ÿ¿Ω</a>
+-		<%
+-				}
+-			%>
+-
+-		<a href="<%=boardName%>Write.jsp?boardName=<%=boardName%>" class="btn btn-primary pull-right">±€æ≤±‚</a>
+-	</div>
+-</div>
+\ No newline at end of file
+diff --git a/WebContent/_boardWrite.jsp b/WebContent/_boardWrite.jsp
+index 43c645c..f1cf554 100644
+--- a/WebContent/_boardWrite.jsp
++++ b/WebContent/_boardWrite.jsp
+@@ -1,9 +1,9 @@
+-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+-    pageEncoding="EUC-KR"%>
++<%@ page language="java" contentType="text/html; charset=UTF-8"
++    pageEncoding="UTF-8"%>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
++<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Insert title here</title>
+ </head>
+ <body>
+@@ -22,23 +22,23 @@ String authorize = boardName+"Authorize";
+ 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+ 					<thead>
+ 						<tr>
+-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">∞‘Ω√∆« ±€æ≤±‚ æÁΩƒ</th>
++							<th colspan="2" style="background-color: #eeeeee; text-align: center;">Í≤åÏãúÌåê Í∏ÄÏì∞Í∏∞ ÏñëÏãù</th>
+ 						</tr>
+ 					</thead>
+ 
+ 					<tbody>
+ 						<tr>
+ 						<tr>
+-							<td><input type="text" class="form-control" placeholder="±€ ¡¶∏Ò" name="<%=title%>" maxlength="50"></td>
+-							<td><select class="form-control" name="<%=authorize%>"><option value="1" selected>¿¸√º∞¯∞≥</option><option value="2">≥™∏∏∫∏±‚</option></select></td>
++							<td><input type="text" class="form-control" placeholder="Í∏Ä Ï†úÎ™©" name="<%=title%>" maxlength="50"></td>
++							<td><select class="form-control" name="<%=authorize%>"><option value="1" selected>Ï†ÑÏ≤¥Í≥µÍ∞ú</option><option value="2">ÎÇòÎßåÎ≥¥Í∏∞</option></select></td>
+ 						</tr>
+ 						<tr>
+-							<td colspan="2"><textarea type="text" class="form-control" placeholder="±€ ≥ªøÎ" name="<%=content%>" maxlength="2048" style="height: 350px;"></textarea></td>
++							<td colspan="2"><textarea type="text" class="form-control" placeholder="Í∏Ä ÎÇ¥Ïö©" name="<%=content%>" maxlength="2048" style="height: 350px;"></textarea></td>
+ 						</tr>
+ 						<jsp:include page="_fileUpload.jsp" flush="false"/>
+ 					</tbody>
+ 				</table>
+-				<input type="submit" class="btn btn-primary pull-right" value="¿€º∫øœ∑·">
++				<input type="submit" class="btn btn-primary pull-right" value="ÏûëÏÑ±ÏôÑÎ£å">
+ 			</form>
+ 		</div>
+ 	</div>
+diff --git a/WebContent/_fileUpload.jsp b/WebContent/_fileUpload.jsp
+index 4127c69..8bdd047 100644
+--- a/WebContent/_fileUpload.jsp
++++ b/WebContent/_fileUpload.jsp
+@@ -4,7 +4,7 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
++<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Insert title here</title>
+ </head>
+ <body>
+diff --git a/WebContent/_headNav.jsp b/WebContent/_headNav.jsp
+index 3600bf6..9e6c9ac 100644
+--- a/WebContent/_headNav.jsp
++++ b/WebContent/_headNav.jsp
+@@ -4,7 +4,7 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
++<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Insert title here</title>
+ </head>
+ <body>
+diff --git a/WebContent/bbs.jsp b/WebContent/bbs.jsp
+index 5daece2..2a1ffe7 100644
+--- a/WebContent/bbs.jsp
++++ b/WebContent/bbs.jsp
+@@ -1,12 +1,11 @@
++<%@ page import="bbs.Bbs"%>
++<%@ page import="bbs.BbsDAO"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+ <%@ page import="java.io.PrintWriter" %>
+-<%@ page import="bbs.BbsDAO" %>
+-<%@ page import="bbs.Bbs" %>
+ <%@ page import="java.util.ArrayList" %>
+   
+ 
+-
+ <!DOCTYPE html>
+ <html>
+ <head>
+diff --git a/WebContent/mountain.jsp b/WebContent/mountain.jsp
+index bdab799..5345920 100644
+--- a/WebContent/mountain.jsp
++++ b/WebContent/mountain.jsp
+@@ -6,7 +6,6 @@
+ <%@ page import="java.util.ArrayList" %>
+ 
+ 
+-
+ <!DOCTYPE html>
+ <html>
+ <head>
+@@ -22,78 +21,8 @@
+ </style>
+ </head>
+ <body>
+-	<%
+-		String userID = null;
+-		if(session.getAttribute("userID") != null){
+-			userID = (String)session.getAttribute("userID");
+-		}
+-		int pageNumber = 1;
+-		if(request.getParameter("pageNumber") != null){
+-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+-		}
+-	%>
+-	
+-	
+ 	<jsp:include page="_headNav.jsp" flush="false"/>
+-	
+-	<div class="container">
+-		<div class="row">
+-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+-				<thead>
+-					<tr>
+-						<th style="background-color: #eeeeee; text-align: center;">ÎåìÍ∏Ä</th>
+-						<th style="background-color: #eeeeee; text-align: center;">Ï†úÎ™©</th>
+-						<th style="background-color: #eeeeee; text-align: center;">ÏûëÏÑ±Ïûê</th>
+-						<th style="background-color: #eeeeee; text-align: center;">ÏûëÏÑ±Ïùº</th>
+-					</tr>
+-				</thead>
+-				
+-				<tbody>
+-				<%
+-					MountainMasterDAO mountainMasterDAO = new MountainMasterDAO();
+-					ArrayList<MountainMaster> list = mountainMasterDAO.getList(pageNumber);
+-					
+-					for(int i=0; i<list.size(); i++){
+-						int replyCnt = mountainMasterDAO.getReplyCnt(list.get(i).getMountainNo());
+-						int replyColorFlag = mountainMasterDAO.getReplyColor(list.get(i).getMountainNo());
+-				%>
+-					<tr>
+-						<td
+-						<%
+-							if(replyColorFlag==1){%> style="color:#873286;"<%}
+-							else if(replyColorFlag==2){%> style="color:#DE2A45;"<%}
+-							else if(replyColorFlag==3){%> style="color:#F5762C;"<%}
+-							else if(replyColorFlag==4){%> style="color:#10BF00;"<%}
+-							else if(replyColorFlag==5){%> style="color:#2865BF;"<%}
+-							else if(replyColorFlag==6){%> style="color:black;"<%}
+-						%>>
+-						<%if(replyCnt!=0){%><%=replyCnt%><%}%></td>
+-						<td><a href="mountainView.jsp?mountainNo=<%= list.get(i).getMountainNo() %>"><%= list.get(i).getMountainTitle() %></a></td>
+-						<td><%= list.get(i).getMountainMakeUser() %></td>
+-						<td><%= list.get(i).getMountainMakeDt().substring(0,11)+list.get(i).getMountainMakeDt().substring(11,13)+"Ïãú"+list.get(i).getMountainMakeDt().substring(14,16)+"Î∂Ñ" %></td>
+-					</tr>
+-				<%
+-					}				
+-				%>
+-				</tbody>
+-			</table>
+-			
+-			<%
+-				if(pageNumber!= 1){
+-			%>
+-				<a href="mountain.jsp?boardName=mountain&pageNumber=<%=pageNumber-1%>" class="btn btn-successs btn-arrow-left">Ïù¥Ï†Ñ</a>
+-			<%
+-				} if(mountainMasterDAO.nextPage(pageNumber+1)) {
+-			%>
+-				<a href="mountain.jsp?boardName=mountain&pageNumber=<%=pageNumber+1%>" class="btn btn-successs btn-arrow-right">Îã§Ïùå</a>
+-			<%
+-				}
+-			%>
+-			
+-			<a href="mountainWrite.jsp?boardName=mountain" class="btn btn-primary pull-right">Í∏ÄÏì∞Í∏∞</a>
+-		</div>
+-	</div>
+-	
++	<jsp:include page="_board.jsp" flush="false" />
+ 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+ 	<script src="js/bootstrap.js"></script>
+ </body>
+diff --git a/WebContent/mountainWrite2.jsp b/WebContent/mountainWrite2.jsp
+deleted file mode 100644
+index 79e51af..0000000
+--- a/WebContent/mountainWrite2.jsp
++++ /dev/null
+@@ -1,45 +0,0 @@
+-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+-<%@ page import="java.io.PrintWriter"%>
+-
+-
+-<!DOCTYPE html>
+-<html>
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+-<meta name="viewport" content="width=device-width" , initial-scale="1">
+-<link rel="stylesheet" href="css/bootstrap.css">
+-<title>DREAMY CAT</title>
+-</head>
+-<body>
+-	<jsp:include page="_headNav.jsp" flush="false" />
+-
+-	<div class="container">
+-		<div class="row">
+-			<form method="post" action="mountainWriteAction.jsp" enctype="multipart/form-data">
+-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+-					<thead>
+-						<tr>
+-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">Í≤åÏãúÌåê Í∏ÄÏì∞Í∏∞ ÏñëÏãù</th>
+-						</tr>
+-					</thead>
+-
+-					<tbody>
+-						<tr>
+-						<tr>
+-							<td><input type="text" class="form-control" placeholder="Í∏Ä Ï†úÎ™©" name="mountainTitle" maxlength="50"></td>
+-						</tr>
+-						<tr>
+-							<td><textarea class="form-control" placeholder="Í∏Ä ÎÇ¥Ïö©" name="mountainContent" maxlength="2048" style="height: 350px;"></textarea></td>
+-						</tr>
+-						<jsp:include page="_fileUpload.jsp" flush="false"/>
+-					</tbody>
+-				</table>
+-				<input type="submit" class="btn btn-primary pull-right" value="ÏûëÏÑ±ÏôÑÎ£å">
+-			</form>
+-		</div>
+-	</div>
+-
+-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+-	<script src="js/bootstrap.js"></script>
+-</body>
+-</html>
+\ No newline at end of file
+diff --git a/WebContent/mountainWriteAction.jsp b/WebContent/mountainWriteAction.jsp
+index 5936ae9..c43f618 100644
+--- a/WebContent/mountainWriteAction.jsp
++++ b/WebContent/mountainWriteAction.jsp
+@@ -57,7 +57,7 @@
+ 			} else {
+ 				MountainMasterDAO mountainMasterDAO = new MountainMasterDAO();
+ 				int result = mountainMasterDAO.write(multipartRequest.getParameterValues("mountainTitle")[0], userID,
+-						multipartRequest.getParameterValues("mountainContent")[0]);
++						multipartRequest.getParameterValues("mountainContent")[0], Integer.parseInt(multipartRequest.getParameterValues("mountainAuthorize")[0]));
+ 
+ 				if (result == -1) {
+ 					PrintWriter script = response.getWriter();
+diff --git a/bin/bbs/Bbs.class b/bin/bbs/Bbs.class
+deleted file mode 100644
+index a3a2d09..0000000
+Binary files a/bin/bbs/Bbs.class and /dev/null differ
+diff --git a/bin/bbs/BbsDAO.class b/bin/bbs/BbsDAO.class
+deleted file mode 100644
+index 757eeac..0000000
+Binary files a/bin/bbs/BbsDAO.class and /dev/null differ
+diff --git a/bin/file/FileDAO.class b/bin/file/FileDAO.class
+deleted file mode 100644
+index f3d0b8b..0000000
+Binary files a/bin/file/FileDAO.class and /dev/null differ
+diff --git a/bin/file/FileDTO.class b/bin/file/FileDTO.class
+deleted file mode 100644
+index 6097c9b..0000000
+Binary files a/bin/file/FileDTO.class and /dev/null differ
+diff --git a/bin/file/downloadAction.class b/bin/file/downloadAction.class
+deleted file mode 100644
+index 4ce4af1..0000000
+Binary files a/bin/file/downloadAction.class and /dev/null differ
+diff --git a/bin/mountainFile/MountainFile.class b/bin/mountainFile/MountainFile.class
+deleted file mode 100644
+index bd1c59e..0000000
+Binary files a/bin/mountainFile/MountainFile.class and /dev/null differ
+diff --git a/bin/mountainFile/MountainFileDAO.class b/bin/mountainFile/MountainFileDAO.class
+deleted file mode 100644
+index ee04206..0000000
+Binary files a/bin/mountainFile/MountainFileDAO.class and /dev/null differ
+diff --git a/bin/mountainFile/MountainFileDownloadAction.class b/bin/mountainFile/MountainFileDownloadAction.class
+deleted file mode 100644
+index 27bb2fb..0000000
+Binary files a/bin/mountainFile/MountainFileDownloadAction.class and /dev/null differ
+diff --git a/bin/mountainMaster/MountainMaster.class b/bin/mountainMaster/MountainMaster.class
+deleted file mode 100644
+index 73d3328..0000000
+Binary files a/bin/mountainMaster/MountainMaster.class and /dev/null differ
+diff --git a/bin/mountainMaster/MountainMasterDAO.class b/bin/mountainMaster/MountainMasterDAO.class
+deleted file mode 100644
+index 0d356c9..0000000
+Binary files a/bin/mountainMaster/MountainMasterDAO.class and /dev/null differ
+diff --git a/bin/mountainReReply/MountainReReply.class b/bin/mountainReReply/MountainReReply.class
+deleted file mode 100644
+index ac0a8a2..0000000
+Binary files a/bin/mountainReReply/MountainReReply.class and /dev/null differ
+diff --git a/bin/mountainReReply/MountainReReplyDAO.class b/bin/mountainReReply/MountainReReplyDAO.class
+deleted file mode 100644
+index 7b02a2f..0000000
+Binary files a/bin/mountainReReply/MountainReReplyDAO.class and /dev/null differ
+diff --git a/bin/mountainReply/MountainReply.class b/bin/mountainReply/MountainReply.class
+deleted file mode 100644
+index ab9991e..0000000
+Binary files a/bin/mountainReply/MountainReply.class and /dev/null differ
+diff --git a/bin/mountainReply/MountainReplyDAO.class b/bin/mountainReply/MountainReplyDAO.class
+deleted file mode 100644
+index fa2b108..0000000
+Binary files a/bin/mountainReply/MountainReplyDAO.class and /dev/null differ
+diff --git a/bin/reply/Reply.class b/bin/reply/Reply.class
+deleted file mode 100644
+index b237f17..0000000
+Binary files a/bin/reply/Reply.class and /dev/null differ
+diff --git a/bin/reply/ReplyDAO.class b/bin/reply/ReplyDAO.class
+deleted file mode 100644
+index 4690ee8..0000000
+Binary files a/bin/reply/ReplyDAO.class and /dev/null differ
+diff --git a/bin/threadFile/ThreadFile.class b/bin/threadFile/ThreadFile.class
+deleted file mode 100644
+index 435fd54..0000000
+Binary files a/bin/threadFile/ThreadFile.class and /dev/null differ
+diff --git a/bin/threadFile/ThreadFileDAO.class b/bin/threadFile/ThreadFileDAO.class
+deleted file mode 100644
+index 182df58..0000000
+Binary files a/bin/threadFile/ThreadFileDAO.class and /dev/null differ
+diff --git a/bin/threadFile/ThreadFileDownloadAction.class b/bin/threadFile/ThreadFileDownloadAction.class
+deleted file mode 100644
+index 62fefe6..0000000
+Binary files a/bin/threadFile/ThreadFileDownloadAction.class and /dev/null differ
+diff --git a/bin/threadMaster/ThreadMaster.class b/bin/threadMaster/ThreadMaster.class
+deleted file mode 100644
+index 7266949..0000000
+Binary files a/bin/threadMaster/ThreadMaster.class and /dev/null differ
+diff --git a/bin/threadMaster/ThreadMasterDAO.class b/bin/threadMaster/ThreadMasterDAO.class
+deleted file mode 100644
+index 5d0cb72..0000000
+Binary files a/bin/threadMaster/ThreadMasterDAO.class and /dev/null differ
+diff --git a/bin/threadReply/ThreadReply.class b/bin/threadReply/ThreadReply.class
+deleted file mode 100644
+index 300ae9a..0000000
+Binary files a/bin/threadReply/ThreadReply.class and /dev/null differ
+diff --git a/bin/threadReply/ThreadReplyDAO.class b/bin/threadReply/ThreadReplyDAO.class
+deleted file mode 100644
+index ae85d7c..0000000
+Binary files a/bin/threadReply/ThreadReplyDAO.class and /dev/null differ
+diff --git a/bin/user/User.class b/bin/user/User.class
+deleted file mode 100644
+index 4783822..0000000
+Binary files a/bin/user/User.class and /dev/null differ
+diff --git a/bin/user/UserDAO.class b/bin/user/UserDAO.class
+deleted file mode 100644
+index f502a11..0000000
+Binary files a/bin/user/UserDAO.class and /dev/null differ
+diff --git a/build/classes/bbs/Bbs.class b/build/classes/bbs/Bbs.class
+deleted file mode 100644
+index a3a2d09..0000000
+Binary files a/build/classes/bbs/Bbs.class and /dev/null differ
+diff --git a/build/classes/bbs/BbsDAO.class b/build/classes/bbs/BbsDAO.class
+deleted file mode 100644
+index 757eeac..0000000
+Binary files a/build/classes/bbs/BbsDAO.class and /dev/null differ
+diff --git a/build/classes/file/FileDAO.class b/build/classes/file/FileDAO.class
+deleted file mode 100644
+index f3d0b8b..0000000
+Binary files a/build/classes/file/FileDAO.class and /dev/null differ
+diff --git a/build/classes/file/FileDTO.class b/build/classes/file/FileDTO.class
+deleted file mode 100644
+index 6097c9b..0000000
+Binary files a/build/classes/file/FileDTO.class and /dev/null differ
+diff --git a/build/classes/file/downloadAction.class b/build/classes/file/downloadAction.class
+deleted file mode 100644
+index 4ce4af1..0000000
+Binary files a/build/classes/file/downloadAction.class and /dev/null differ
+diff --git a/build/classes/mountainFile/MountainFile.class b/build/classes/mountainFile/MountainFile.class
+deleted file mode 100644
+index bd1c59e..0000000
+Binary files a/build/classes/mountainFile/MountainFile.class and /dev/null differ
+diff --git a/build/classes/mountainFile/MountainFileDAO.class b/build/classes/mountainFile/MountainFileDAO.class
+deleted file mode 100644
+index ee04206..0000000
+Binary files a/build/classes/mountainFile/MountainFileDAO.class and /dev/null differ
+diff --git a/build/classes/mountainFile/MountainFileDownloadAction.class b/build/classes/mountainFile/MountainFileDownloadAction.class
+deleted file mode 100644
+index 27bb2fb..0000000
+Binary files a/build/classes/mountainFile/MountainFileDownloadAction.class and /dev/null differ
+diff --git a/build/classes/mountainMaster/MountainMaster.class b/build/classes/mountainMaster/MountainMaster.class
+deleted file mode 100644
+index 4eb95c9..0000000
+Binary files a/build/classes/mountainMaster/MountainMaster.class and /dev/null differ
+diff --git a/build/classes/mountainMaster/MountainMasterDAO.class b/build/classes/mountainMaster/MountainMasterDAO.class
+deleted file mode 100644
+index f7d9628..0000000
+Binary files a/build/classes/mountainMaster/MountainMasterDAO.class and /dev/null differ
+diff --git a/build/classes/mountainReReply/MountainReReply.class b/build/classes/mountainReReply/MountainReReply.class
+deleted file mode 100644
+index ac0a8a2..0000000
+Binary files a/build/classes/mountainReReply/MountainReReply.class and /dev/null differ
+diff --git a/build/classes/mountainReReply/MountainReReplyDAO.class b/build/classes/mountainReReply/MountainReReplyDAO.class
+deleted file mode 100644
+index 7b02a2f..0000000
+Binary files a/build/classes/mountainReReply/MountainReReplyDAO.class and /dev/null differ
+diff --git a/build/classes/mountainReply/MountainReply.class b/build/classes/mountainReply/MountainReply.class
+deleted file mode 100644
+index ab9991e..0000000
+Binary files a/build/classes/mountainReply/MountainReply.class and /dev/null differ
+diff --git a/build/classes/mountainReply/MountainReplyDAO.class b/build/classes/mountainReply/MountainReplyDAO.class
+deleted file mode 100644
+index fa2b108..0000000
+Binary files a/build/classes/mountainReply/MountainReplyDAO.class and /dev/null differ
+diff --git a/build/classes/reply/Reply.class b/build/classes/reply/Reply.class
+deleted file mode 100644
+index b237f17..0000000
+Binary files a/build/classes/reply/Reply.class and /dev/null differ
+diff --git a/build/classes/reply/ReplyDAO.class b/build/classes/reply/ReplyDAO.class
+deleted file mode 100644
+index 4690ee8..0000000
+Binary files a/build/classes/reply/ReplyDAO.class and /dev/null differ
+diff --git a/build/classes/threadFile/ThreadFile.class b/build/classes/threadFile/ThreadFile.class
+deleted file mode 100644
+index 435fd54..0000000
+Binary files a/build/classes/threadFile/ThreadFile.class and /dev/null differ
+diff --git a/build/classes/threadFile/ThreadFileDAO.class b/build/classes/threadFile/ThreadFileDAO.class
+deleted file mode 100644
+index 182df58..0000000
+Binary files a/build/classes/threadFile/ThreadFileDAO.class and /dev/null differ
+diff --git a/build/classes/threadFile/ThreadFileDownloadAction.class b/build/classes/threadFile/ThreadFileDownloadAction.class
+deleted file mode 100644
+index 62fefe6..0000000
+Binary files a/build/classes/threadFile/ThreadFileDownloadAction.class and /dev/null differ
+diff --git a/build/classes/threadMaster/ThreadMaster.class b/build/classes/threadMaster/ThreadMaster.class
+deleted file mode 100644
+index 7266949..0000000
+Binary files a/build/classes/threadMaster/ThreadMaster.class and /dev/null differ
+diff --git a/build/classes/threadMaster/ThreadMasterDAO.class b/build/classes/threadMaster/ThreadMasterDAO.class
+deleted file mode 100644
+index 5d0cb72..0000000
+Binary files a/build/classes/threadMaster/ThreadMasterDAO.class and /dev/null differ
+diff --git a/build/classes/threadReply/ThreadReply.class b/build/classes/threadReply/ThreadReply.class
+deleted file mode 100644
+index 300ae9a..0000000
+Binary files a/build/classes/threadReply/ThreadReply.class and /dev/null differ
+diff --git a/build/classes/threadReply/ThreadReplyDAO.class b/build/classes/threadReply/ThreadReplyDAO.class
+deleted file mode 100644
+index ae85d7c..0000000
+Binary files a/build/classes/threadReply/ThreadReplyDAO.class and /dev/null differ
+diff --git a/build/classes/user/User.class b/build/classes/user/User.class
+deleted file mode 100644
+index 4783822..0000000
+Binary files a/build/classes/user/User.class and /dev/null differ
+diff --git a/build/classes/user/UserDAO.class b/build/classes/user/UserDAO.class
+deleted file mode 100644
+index f502a11..0000000
+Binary files a/build/classes/user/UserDAO.class and /dev/null differ
+diff --git a/src/bbs/Bbs.java b/src/bbs/Bbs.java
+index e54e12c..5bf9af6 100644
+--- a/src/bbs/Bbs.java
++++ b/src/bbs/Bbs.java
+@@ -11,7 +11,7 @@ public class Bbs {
+ 	
+ 	
+ 	public int getBbsID() {
+-		return bbsID;
++		return bbsID; 
+ 	}
+ 	public void setBbsID(int bbsID) {
+ 		this.bbsID = bbsID;
+diff --git a/src/bbs/BbsDAO.java b/src/bbs/BbsDAO.java
+index 99017a2..5c52a48 100644
+--- a/src/bbs/BbsDAO.java
++++ b/src/bbs/BbsDAO.java
+@@ -12,7 +12,7 @@ public class BbsDAO {
+ 	private Connection conn;
+ 	private ResultSet rs;
+ 	
+-	public BbsDAO() {
++	public BbsDAO() { 
+ 		try {
+ 			String ipStr;
+ 			InetAddress ip = InetAddress.getLocalHost();
+diff --git a/src/board/BoardDAO.java b/src/board/BoardDAO.java
+index c11ce0c..1c80530 100644
+--- a/src/board/BoardDAO.java
++++ b/src/board/BoardDAO.java
+@@ -299,4 +299,4 @@ public class BoardDAO {
+ 		}
+ 		return -1;
+ 	}
+-}
++}
+\ No newline at end of file
