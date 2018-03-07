@@ -138,7 +138,7 @@
 				<table class="table table-condensed">
 					<tbody>
 						<tr>
-							<td style="width: 90%;"><textarea class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></textarea></td>
+							<td style="width: 90%;"><textarea type="text" class="form-control" placeholder="댓글" name="replyContent" id="replyContent" maxlength="2048" style="height: 150px;"></textarea></td>
 							<td style="width: 10%; vertical-align: bottom;" align="center"><input type="button" onclick="replySubmit()" class="btn btn-primary pull-right" value="댓글작성"></td>
 						</tr>		
 					</tbody>
